@@ -1,16 +1,11 @@
-/* Estilos personalizados para o logo */
-.logo {
-  max-width: 100%;
-  /* O logo será redimensionado para caber na largura do elemento pai */
-  height: auto;
-  /* Mantém a proporção da imagem */
-  /* Adicione outros estilos conforme necessário */
+.zeldaGame {
+  height: 500px;
 }
 
-/* Estilos específicos para telas menores usando as classes de responsividade do Bootstrap */
-@media (max-width: 768px) {
-  .logo {
-    max-width: 80%;
-    /* Reduz o tamanho do logo em telas menores */
-  }
+.nfsGame {
+  height: 500px;
+}
+
+.codGame {
+  height: 500px;
 }
