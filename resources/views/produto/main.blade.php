@@ -167,11 +167,9 @@
 
             <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                 @foreach($produtos as $produto)
-
-
                 <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <a href="#">
-                        <img class="p-8 rounded-t-lg w-full h-60 " src="{{ $produto->imagem->first()->IMAGEM_URL }}" alt="product image" />
+                        <img class="p-8 rounded-t-lg w-full h-60 " src="{{ $produto->imagem->first()->IMAGEM_URL ?? "" }}" alt="product image" />
                     </a>
                     <div class="px-5 pb-5">
                         <a href="#">
