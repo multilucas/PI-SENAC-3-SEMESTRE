@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @vite([asset('css/app.css'), asset('js/app.js')])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2"></script>
 </head>
 
 <body>
@@ -167,11 +167,21 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-x-6 gap-y-10 xl:gap-x-8">
                 @foreach($produtos as $produto)
                 <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
-                        <img class="p-8 rounded-t-lg w-full h-60" src="{{ $produto->imagem->first()->IMAGEM_URL ?? '' }}" alt="product image" />
-                    </a>
-                    <div class="px-5 pb-5">
-                        <a href="#">
+                    <div x-data="{ showModal: false }">
+                        <!-- Imagem do Produto com clique para abrir o modal -->
+                        <img x-on:click="showModal = true" class="p-8 rounded-t-lg w-full h-60 cursor-pointer" src="{{ $produto->imagem->first()->IMAGEM_URL ?? '' }}" alt="product image" />
+
+                        <!-- Modal -->
+                        <div x-show="showModal" x-on:click.outside="showModal = false" class="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-50">
+                            <div class="bg-white p-4 rounded-lg shadow-xl">
+                                <!-- Conteúdo do modal -->
+                                <h1 class="text-xl font-semibold mb-2">{{ $produto->PRODUTO_NOME }}</h1>
+                                <p>Descrição do produto.</p>
+                                <button x-on:click="showModal = false" class="mt-4 bg-blue-700 text-white py-2 px-4 rounded-md hover:bg-blue-800">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5"> <a href="#">
                             <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ $produto->PRODUTO_NOME }}</h5>
                         </a>
                         <div class="flex items-center mt-2.5 mb-5">
