@@ -1,29 +1,54 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+<!DOCTYPE html>
+<html class="dark">
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
+<body class="bg-gray-900 text-white flex items-center justify-center h-screen dark:bg-gray-900 dark:text-gray-200">
+    <div class="max-w-md w-full">
+        <div class="bg-gray-700 dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-8 text-center">
+                <h2 class="text-2xl font-semibold">Editar Perfil</h2>
             </div>
-
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
+            <form method="POST" action="{{ route('profile.update') }}">
+                @csrf
+                @method('PUT')
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="USUARIO_NOME">
+                        Nome
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline" type="text" name="USUARIO_NOME" value="{{ $user->USUARIO_NOME }}">
                 </div>
-            </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="USUARIO_EMAIL">
+                        Email
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline" type="text" name="USUARIO_EMAIL" value="{{ $user->USUARIO_EMAIL}}">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="USUARIO_SENHA">
+                        Senha
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline" type="password" name="USUARIO_SENHA" }}">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-bold mb-2" for="USUARIO_CPF">
+                        CPF
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline" type="text" name="USUARIO_CPF" value="{{ $user->USUARIO_CPF}}">
+                </div>
+                <div class="flex items-center justify-between">
+                    <button class="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                        Atualizar Perfil
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
-</x-app-layout>
+</body>
+
+</html>
