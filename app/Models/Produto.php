@@ -9,7 +9,7 @@ class Produto extends Model
 {
     use HasFactory;
     protected $table = "PRODUTO";
-    protected $primaryKey = 'PRODUTO_CODIGO';
+    protected $primaryKey = 'PRODUTO_ID';
 
     public function imagem() {
         return $this->hasMany(ProdutoImagem::class, 'PRODUTO_ID', 'PRODUTO_ID');
