@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Carrinho;
 use Illuminate\Http\Request;
 
@@ -34,8 +35,11 @@ public function adicionarAoCarrinho(Request $request, $produtoId)
     public function index()
     {
         // Recupere os itens do carrinho do usuário autenticado
-        $carrinhoItens = Carrinho::where('USUARIO_ID', auth()->user()->id)->get();
-        return view('carrinho.index', compact('carrinhoItens'));
+
+        $categorias = Categoria::all();
+        $carrinhoItens = Carrinho::where('USUARIO_ID', auth()->user()->USUARIO_ID)->get();
+
+        return view('carrinho.index', compact('carrinhoItens'), compact('categorias'));
     }
 
     public function removerDoCarrinho($carrinhoItemId)

@@ -13,19 +13,18 @@ Route::post('/login', 'Auth\AuthenticatedSessionController@store');
 Route::get('/register', 'Auth\RegisteredUserController@create');
 Route::post('/register', 'Auth\RegisteredUserController@store');
 
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
+    Route::get('/carrinho', [CategoriaController::class, 'indexNoCarrinho'])->name('categorias.index');
+
     Route::get('/adicionar-ao-carrinho/{produtoId}', [CarrinhoController::class, 'adicionarAoCarrinho'])
         ->name('adicionar-ao-carrinho');
 
     Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
-
 });
 
 require __DIR__ . '/auth.php';
