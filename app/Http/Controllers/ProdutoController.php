@@ -17,9 +17,7 @@ class ProdutoController extends Controller
     }
     public function showByCategory(Categoria $categoria)
     {
-        // Aproveite o relacionamento para obter os produtos da categoria
-        $produtos = $categoria->produtos->paginate(8);
-
+        $produtos = $categoria->produtos;
         $categorias = Categoria::all();
 
         return view('produto.main', compact('produtos', 'categorias'));
