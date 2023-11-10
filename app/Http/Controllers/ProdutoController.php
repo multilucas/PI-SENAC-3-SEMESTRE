@@ -8,11 +8,20 @@ use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
 {
-    public function index() {
-        return view('produto.main',[ 
-                'produtos' => Produto::all(),
-                 'categorias' => Categoria::all()
-            ]);
+    public function index()
+    {
+        return view('produto.main', [
+            'produtos' => Produto::all(),
+            'categorias' => Categoria::all()
+        ]);
+    }
+    public function showByCategory(Categoria $categoria)
+    {
+        // Aproveite o relacionamento para obter os produtos da categoria
+        $produtos = $categoria->produtos;
 
+        $categorias = Categoria::all();
+
+        return view('produto.main', compact('produtos', 'categorias'));
     }
 }

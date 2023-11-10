@@ -15,6 +15,15 @@
                 }
             }
         }
+        function scrollToProdutos(event) {
+            event.preventDefault(); // Impede o comportamento padrão do link
+            var produtosElement = document.getElementById('produtos');
+            if (produtosElement) {
+                produtosElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        }
     </script>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @vite([asset('css/app.css'), asset('js/app.js')])
@@ -50,7 +59,7 @@
                         <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
                                 <li>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Todos os jogos</a>
+                                    <a href="{{ url()->current() }}#produtos" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Todos os jogos</a>
                                 </li>
                                 <!-- dropdown MENU -->
 
@@ -66,10 +75,9 @@
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton">
                                             @foreach($categorias as $categoria)
                                             <li>
-                                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ $categoria->CATEGORIA_NOME}}</a>
+                                                <a href="{{ route('categoria.show', ['categoria' => $categoria]) }}#produtos" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >{{ $categoria->CATEGORIA_NOME }}</a>
                                             </li>
                                             @endforeach
-
                                         </ul>
                                     </div>
                                 </li>
@@ -77,15 +85,6 @@
                                     <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
                                 </li>
                             </ul>
-                            <div class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                @auth
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit">Sign Out</button>
-                                </form>
-                                @endauth
-
-                            </div>
                         </div>
                     </li>
 
@@ -95,9 +94,27 @@
                     <li>
                         <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
                     </li>
+                    @guest
                     <li>
-                        <a href="{{ route("login")}}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
+                        <a href="{{ route('login') }}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
                     </li>
+                    @else
+                    <li x-data="{ open: false }">
+                        <button @click="open = !open" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Perfil</button>
+
+                        <ul x-show="open" @click.away="open = false" class="absolute mt-2 bg-white border border-gray-300 dark:bg-gray-800 dark:border-gray-600 rounded-lg shadow-md">
+                            <li>
+                                <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Editar Perfil</a>
+                            </li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="block w-full text-left px-4 py-2 text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700">Sair</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                    @endguest
                 </ul>
             </div>
         </div>
@@ -289,7 +306,7 @@
     <div class="bg-gray-900">
         <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
 
-            <h2 class="inline-flex items-center justify-center px-5 py-3 mr-3 text-3xl font-large text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">Produtos</h2>
+            <h2 class="inline-flex items-center justify-center px-5 py-3 mr-3 text-3xl font-large text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 " id="produtos">Produtos</h2>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-x-6 gap-y-10 xl:gap-x-8">
                 @foreach($produtos as $produto)

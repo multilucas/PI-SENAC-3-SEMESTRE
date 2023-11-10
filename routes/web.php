@@ -6,13 +6,17 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 
-Route::get('/', [ProdutoController::class, 'index'])->name('produtos.index');
+//convidados
+Route::get('/', [ProdutoController::class, 'index'])->name('produtos.main');
+
 Route::get('/categorias', [CategoriaController::class, 'index']);
 Route::get('/login', 'Auth\AuthenticatedSessionController@create')->name('login');
 Route::post('/login', 'Auth\AuthenticatedSessionController@store');
 Route::get('/register', 'Auth\RegisteredUserController@create');
 Route::post('/register', 'Auth\RegisteredUserController@store');
+Route::get('/categoria/{categoria}', [ProdutoController::class, 'showByCategory'])->name('categoria.show');
 
+//autenticados
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
