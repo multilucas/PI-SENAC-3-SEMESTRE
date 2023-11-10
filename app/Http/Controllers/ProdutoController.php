@@ -11,14 +11,14 @@ class ProdutoController extends Controller
     public function index()
     {
         return view('produto.main', [
-            'produtos' => Produto::all(),
+            'produtos' => Produto::paginate(8),
             'categorias' => Categoria::all()
         ]);
     }
     public function showByCategory(Categoria $categoria)
     {
         // Aproveite o relacionamento para obter os produtos da categoria
-        $produtos = $categoria->produtos;
+        $produtos = $categoria->produtos->paginate(8);
 
         $categorias = Categoria::all();
 

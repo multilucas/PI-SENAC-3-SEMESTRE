@@ -15,6 +15,7 @@
                 }
             }
         }
+
         function scrollToProdutos(event) {
             event.preventDefault(); // Impede o comportamento padrão do link
             var produtosElement = document.getElementById('produtos');
@@ -75,7 +76,7 @@
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton">
                                             @foreach($categorias as $categoria)
                                             <li>
-                                                <a href="{{ route('categoria.show', ['categoria' => $categoria]) }}#produtos" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" >{{ $categoria->CATEGORIA_NOME }}</a>
+                                                <a href="{{ route('categoria.show', ['categoria' => $categoria]) }}#produtos" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ $categoria->CATEGORIA_NOME }}</a>
                                             </li>
                                             @endforeach
                                         </ul>
@@ -442,6 +443,10 @@
                     </div>
                 </div>
                 @endforeach
+
+                <div class="mt-8 w-full">
+                    {{$produtos->links()}}
+                </div>
             </div>
         </div>
     </div>
