@@ -9,12 +9,15 @@ use App\Http\Controllers\ProdutoController;
 //convidados
 Route::get('/', [ProdutoController::class, 'index'])->name('produtos.main');
 
-Route::get('/categorias', [CategoriaController::class, 'index']);
 Route::get('/login', 'Auth\AuthenticatedSessionController@create')->name('login');
 Route::post('/login', 'Auth\AuthenticatedSessionController@store');
 Route::get('/register', 'Auth\RegisteredUserController@create')->name('register');
 Route::post('/register', 'Auth\RegisteredUserController@store');
 Route::get('/categoria/{categoria}', [ProdutoController::class, 'showByCategory'])->name('categoria.show');
+
+Route::get('/produtos', [ProdutoController::class, 'index'])->name('produtos');
+
+Route::get('/produtos/{categoria?}', [ProdutoController::class, 'index'])->name('produtos.categoria');
 
 //autenticados
 Route::middleware('auth')->group(function () {

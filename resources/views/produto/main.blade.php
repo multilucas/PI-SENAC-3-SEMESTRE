@@ -15,8 +15,6 @@
                 }
             }
         }
-
-        }
     </script>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @vite([asset('css/app.css'), asset('js/app.js')])
@@ -52,7 +50,7 @@
                         <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
                                 <li>
-                                    <a href="{{ url()->current() }}#produtos" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Todos os jogos</a>
+                                    <a href="{{ route('produtos') }}">Todos os jogos</a>
                                 </li>
                                 <!-- dropdown MENU -->
 
@@ -68,7 +66,7 @@
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton">
                                             @foreach($categorias as $categoria)
                                             <li>
-                                                <a href="{{ route('categoria.show', ['categoria' => $categoria]) }}#produtos" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ $categoria->CATEGORIA_NOME }}</a>
+                                                <a href="{{ route('produtos.categoria', ['categoria' => $categoria->CATEGORIA_NOME]) }}">{{ $categoria->CATEGORIA_NOME }}</a>
                                             </li>
                                             @endforeach
                                         </ul>
@@ -84,15 +82,15 @@
                     <li>
                         <a href="#" x-on:click="isCartOpen = true" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
                     </li>
-@guest
+                    @guest
                     <li>
                         <a href="{{route('register')}}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">cadastrar-se</a>
                     </li>
-@else
+                    @else
                     <li>
                         <a href="#" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Meus Pedidos</a>
                     </li>
-@endguest
+                    @endguest
                     @guest
                     <li>
                         <a href="{{ route('login') }}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
@@ -120,111 +118,6 @@
         </div>
 
     </nav>
-    <!-- INICIO CARRINHO -->
-    <div x-show="isCartOpen">
-        <div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-            <div class="fixed inset-0 overflow-hidden">
-                <div class="absolute inset-0 overflow-hidden">
-                    <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-                        <div class="pointer-events-auto w-screen max-w-md">
-                            <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                                <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
-                                    <div class="flex items-start justify-between">
-                                        <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Shopping cart</h2>
-                                        <div class="ml-3 flex h-7 items-center">
-                                            <button type="button" class="absolute top-4 right-4 text-gray-400 hover:text-gray-500" x-on:click="isCartOpen = false">
-                                                <span class="sr-only">Fechar painel</span>
-                                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="mt-8">
-                                        <div class="flow-root">
-                                            <ul role="list" class="-my-6 divide-y divide-gray-200">
-                                                <li class="flex py-6">
-                                                    <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                                        <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="h-full w-full object-cover object-center">
-                                                    </div>
-
-                                                    <div class="ml-4 flex flex-1 flex-col">
-                                                        <div>
-                                                            <div class="flex justify-between text-base font-medium text-gray-900">
-                                                                <h3>
-                                                                    <a href="#">Throwback Hip Bag</a>
-                                                                </h3>
-                                                                <p class="ml-4">$90.00</p>
-                                                            </div>
-                                                            <p class="mt-1 text-sm text-gray-500">Salmon</p>
-                                                        </div>
-                                                        <div class="flex flex-1 items-end justify-between text-sm">
-                                                            <p class="text-gray-500">Qty 1</p>
-
-                                                            <div class="flex">
-                                                                <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li class="flex py-6">
-                                                    <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                                        <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg" alt="Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch." class="h-full w-full object-cover object-center">
-                                                    </div>
-
-                                                    <div class="ml-4 flex flex-1 flex-col">
-                                                        <div>
-                                                            <div class="flex justify-between text-base font-medium text-gray-900">
-                                                                <h3>
-                                                                    <a href="#">Medium Stuff Satchel</a>
-                                                                </h3>
-                                                                <p class="ml-4">$32.00</p>
-                                                            </div>
-                                                            <p class="mt-1 text-sm text-gray-500">Blue</p>
-                                                        </div>
-                                                        <div class="flex flex-1 items-end justify-between text-sm">
-                                                            <p class="text-gray-500">Qty 1</p>
-
-                                                            <div class="flex">
-                                                                <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-
-                                                <!-- More products... -->
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
-                                <div class="flex justify-between text-base font-medium text-gray-900">
-                                    <p>Subtotal</p>
-                                    <p>$262.00</p>
-                                </div>
-                                <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                                <div class="mt-6">
-                                    <a href="#" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
-                                </div>
-                                <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
-                                    <p>
-                                        or
-                                        <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
-                                            Continue Shopping
-                                            <span aria-hidden="true"> &rarr;</span>
-                                        </button>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- FIM CARRINHO -->
 
 
     <!-- Fim Nav Bar-->
@@ -300,161 +193,49 @@
         </button>
     </div>
     <!-- FIM Carrousel -->
+<!--PRODUTOS-->
 
-    <!-- CARDS -->
-    <div class="bg-gray-900">
-        <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+<div class="bg-white">
+  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+    <h2 class="sr-only">Products</h2>
 
-            <h2 class="inline-flex items-center justify-center px-5 py-3 mr-3 text-3xl font-large text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900 " id="produtos">Produtos</h2>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-x-6 gap-y-10 xl:gap-x-8">
-                @foreach($produtos as $produto)
-                <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <div x-data="{ showModal: false }">
-                        <!-- Imagem do Produto com clique para abrir o modal -->
-                        <img x-on:click="showModal = true" class="p-8 rounded-t-lg w-full h-60 cursor-pointer" src="{{ $produto->imagem->first()->IMAGEM_URL ?? '' }}" alt="product image" />
-
-                        <!-- Modal -->
-                        <div x-show="showModal" x-on:click.outside="showModal = false" class="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-50">
-                            <div class="bg-gray-900 p-4 rounded-lg shadow-xl">
-                                <!-- Conteudo do modal -->
-
-                                <div class="relative z-10" role="dialog" aria-modal="true">
-                                    <div class="fixed inset-0 hidden bg-gray-900 bg-opacity-75 transition-opacity md:block"></div>
-
-                                    <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-                                        <div class="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
-                                            <div class="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
-                                                <div class="relative flex w-full items-center overflow-hidden bg-gray-900 px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
-                                                    <button type="button" class="absolute right-4 top-4 text-gray-400 hover:text-gray-500 sm:right-6 sm:top-8 md:right-6 md:top-6 lg:right-8 lg:top-8">
-                                                        <span class="sr-only">Close</span>
-                                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                                        </svg>
-                                                    </button>
-
-                                                    <div class="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
-                                                        <div class="aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
-                                                            <img class="p-8 rounded-t-lg w-full h-60 cursor-pointer" src="{{ $produto->imagem->first()->IMAGEM_URL ?? '' }}" alt="product image">
-                                                        </div>
-                                                        <div class="sm:col-span-8 lg:col-span-7">
-                                                            <h2 class="text-2xl font-bold text-white sm:pr-12">{{ $produto->PRODUTO_NOME}}</h2>
-
-                                                            <section aria-labelledby="information-heading" class="mt-2">
-                                                                <h3 id="information-heading" class="sr-only">Product information</h3>
-
-                                                                <p class="text-2xl text-white">{{$produto->PRODUTO_PRECO}}</p>
-
-                                                                <!-- Reviews -->
-                                                                <div class="mt-6">
-                                                                    <h4 class="sr-only">Reviews</h4>
-                                                                    <div class="flex items-center">
-                                                                        <div class="flex items-center">
-                                                                            <!-- Active: "text-gray-900", Default: "text-gray-200" -->
-                                                                            <svg class="text-gray-200 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                                                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                                                                            </svg>
-                                                                            <svg class="text-gray-200 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                                                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                                                                            </svg>
-                                                                            <svg class="text-gray-200 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                                                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                                                                            </svg>
-                                                                            <svg class="text-gray-200 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                                                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                                                                            </svg>
-                                                                            <svg class="text-gray-600 h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                                                <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                                                                            </svg>
-                                                                        </div>
-                                                                        <p class="sr-only">3.9 out of 5 stars</p>
-                                                                        <a href="#" class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">117 reviews</a>
-                                                                    </div>
-                                                                </div>
-                                                            </section>
-
-                                                            <section aria-labelledby="options-heading" class="mt-10">
-                                                                <h3 id="options-heading" class="sr-only">Product options</h3>
-
-                                                                <form>
-                                                                    <!-- Colors -->
-
-
-                                                                    <!-- Sizes -->
-                                                                    <div class="mt-10">
-                                                                        <p class="text-xl font-semibold tracking-tight text-white "">{{ $produto->PRODUTO_DESC }}</p>
-                                                                    </div>
-
-                                                                    <button type=" submit" class="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add to bag</button>
-                                                                </form>
-                                                            </section>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="px-5 pb-5"> <a href="#">
-                            <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{ $produto->PRODUTO_NOME  }}</h5>
-                        </a>
-                        <div class="flex items-center mt-2.5 mb-5">
-                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-                            <svg class="w-4 h-4 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">5.0</span>
-                        </div>
-                        @if($produto->PRODUTO_PRECO > 0 )
-                        <div class="flex items-center justify-between">
-                            <span class="text-3xl font-bold text-gray-900 dark:text-white">{{ $produto->PRODUTO_PRECO }}</span>
-                            <a href="{{ route('adicionar-ao-carrinho', $produto->PRODUTO_ID) }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover-bg-blue-700 dark:focus:ring-blue-800">
-                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 19 20">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm1-4H5m0 0L3 4m0 0h5.501M3 4l-.792-3H1m11 3h6m-3 3V1" />
-                                </svg>
-                            </a>
-                        </div>
-                        @else
-                        <div class="flex items-center justify-between">
-                            <span class="text-3xl font-bold text-gray-900 dark:text-white">Free</span>
-                            <a href="{{ route('adicionar-ao-carrinho', $produto->PRODUTO_ID) }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover-bg-blue-700 dark:focus:ring-blue-800">
-                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 19 20">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm1-4H5m0 0L3 4m0 0h5.501M3 4l-.792-3H1m11 3h6m-3 3V1" />
-                                </svg>
-                            </a>
-                        </div>
-                        @endif
-                    </div>
-                </div>
-                @endforeach
-
-                <div class="mt-8 w-full">
-                    {{$produtos->links()}}
-                </div>
-            </div>
+    <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+      <a href="#" class="group">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+          <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="h-full w-full object-cover object-center group-hover:opacity-75">
         </div>
-    </div>
-    </div>
-    <!-- More products... -->
-    </div>
-    </div>
-    </div>
+        <h3 class="mt-4 text-sm text-gray-700">Earthen Bottle</h3>
+        <p class="mt-1 text-lg font-medium text-gray-900">$48</p>
+      </a>
+      <a href="#" class="group">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+          <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg" alt="Olive drab green insulated bottle with flared screw lid and flat top." class="h-full w-full object-cover object-center group-hover:opacity-75">
+        </div>
+        <h3 class="mt-4 text-sm text-gray-700">Nomad Tumbler</h3>
+        <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
+      </a>
+      <a href="#" class="group">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+          <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg" alt="Person using a pen to cross a task off a productivity paper card." class="h-full w-full object-cover object-center group-hover:opacity-75">
+        </div>
+        <h3 class="mt-4 text-sm text-gray-700">Focus Paper Refill</h3>
+        <p class="mt-1 text-lg font-medium text-gray-900">$89</p>
+      </a>
+      <a href="#" class="group">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+          <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg" alt="Hand holding black machined steel mechanical pencil with brass tip and top." class="h-full w-full object-cover object-center group-hover:opacity-75">
+        </div>
+        <h3 class="mt-4 text-sm text-gray-700">Machined Mechanical Pencil</h3>
+        <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
+      </a>
 
+      <!-- More products... -->
+    </div>
+  </div>
+</div>
+<!--FIM DOS PRODUTOS-->
 
+<!--FOOTER-->
     <footer class="bg-gray-800 text-white">
         <div class="container mx-auto py-8 flex flex-wrap justify-center">
             <!-- Seção de Links Rápidos -->

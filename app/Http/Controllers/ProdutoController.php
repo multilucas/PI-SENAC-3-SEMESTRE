@@ -8,18 +8,17 @@ use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
 {
-    public function index()
-    {
-        return view('produto.main', [
-            'produtos' => Produto::paginate(8),
-            'categorias' => Categoria::all()
-        ]);
+public function index(Request $request, $categoria = null)
+{
+    // Se a categoria estiver definida, filtre os produtos por ela
+    if ($categoria) {
+        $produtos = Categoria::where('CATEGORIA_NOME', $categoria)->firstOrFail()->produtos()->paginate(8);
+    } else {
+        // Se não, obtenha todos os produtos paginados
+        $produtos = Produto::paginate(8);
     }
-    public function showByCategory(Categoria $categoria)
-    {
-        $produtos = $categoria->produtos;
-        $categorias = Categoria::all();
 
-        return view('produto.main', compact('produtos', 'categorias'));
-    }
-}
+    $categorias = Categoria::all();
+
+    return view('produto.main', compact('produtos', 'categorias'));
+}}
