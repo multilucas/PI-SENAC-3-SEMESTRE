@@ -12,9 +12,7 @@ public function adicionarAoCarrinho(Request $request, $produtoId)
 {
     if (auth()->check()) {
         $user = auth()->user();
-        $carrinhoItem = Carrinho::where('USUARIO_ID', $user->USUARIO_ID)
-            ->where('PRODUTO_ID', $produtoId)
-            ->first();
+        $carrinhoItem = Carrinho::where('USUARIO_ID', $user->USUARIO_ID)->where('PRODUTO_ID', $produtoId)->first();
         if ($carrinhoItem) {
             $carrinhoItem->ITEM_QTD += 1; 
             $carrinhoItem->save();

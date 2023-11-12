@@ -50,7 +50,7 @@
                         <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
                             <ul class="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
                                 <li>
-                                    <a href="{{ route('produtos') }}">Todos os jogos</a>
+                                    <a href="{{ route('produtos') }}" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Todos os jogos</a>
                                 </li>
                                 <!-- dropdown MENU -->
 
@@ -66,9 +66,9 @@
                                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton">
                                             @foreach($categorias as $categoria)
                                             <li>
-                                                <a href="{{ route('produtos.categoria', ['categoria' => $categoria->CATEGORIA_NOME]) }}">{{ $categoria->CATEGORIA_NOME }}</a>
+                                                <a href="{{ route('produtos.categoria', ['categoria' => $categoria->CATEGORIA_NOME]) }}" class="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ $categoria->CATEGORIA_NOME }}</a>
+                                                @endforeach
                                             </li>
-                                            @endforeach
                                         </ul>
                                     </div>
                                 </li>
@@ -116,10 +116,7 @@
             </div>
         </div>
         </div>
-
     </nav>
-
-
     <!-- Fim Nav Bar-->
     <!-- Hero Section -->
     <section class="bg-white dark:bg-gray-900">
@@ -193,49 +190,30 @@
         </button>
     </div>
     <!-- FIM Carrousel -->
-<!--PRODUTOS-->
+    <!--PRODUTOS-->
+    <div class="bg-gray-900">
+        <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+            <h2 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-5xl dark:text-white">Lançamentos</h2>
+            <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
 
-<div class="bg-white">
-  <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-    <h2 class="sr-only">Products</h2>
+                @foreach($produtos as $produto)
+                <a href="#" class="group">
+                    <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                        @foreach($produto->imagens as $imagem)
+                        <img class="p-8 rounded-t-lg w-full h-60 cursor-pointer" src="{{ optional($produto->imagens->first())->IMAGEM_URL }}" alt="product image">
+                        @endforeach
+                    </div>
+                    <h3 class="mt-4 text-sm text-white">{{ $produto->PRODUTO_NOME}}</h3>
+                    <p class="mt-1 text-lg font-medium text-white">{{$produto->PRODUTO_PRECO}}</p>
+                </a>
+                @endforeach
 
-    <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-      <a href="#" class="group">
-        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-          <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." class="h-full w-full object-cover object-center group-hover:opacity-75">
+            </div>
         </div>
-        <h3 class="mt-4 text-sm text-gray-700">Earthen Bottle</h3>
-        <p class="mt-1 text-lg font-medium text-gray-900">$48</p>
-      </a>
-      <a href="#" class="group">
-        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-          <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg" alt="Olive drab green insulated bottle with flared screw lid and flat top." class="h-full w-full object-cover object-center group-hover:opacity-75">
-        </div>
-        <h3 class="mt-4 text-sm text-gray-700">Nomad Tumbler</h3>
-        <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
-      </a>
-      <a href="#" class="group">
-        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-          <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg" alt="Person using a pen to cross a task off a productivity paper card." class="h-full w-full object-cover object-center group-hover:opacity-75">
-        </div>
-        <h3 class="mt-4 text-sm text-gray-700">Focus Paper Refill</h3>
-        <p class="mt-1 text-lg font-medium text-gray-900">$89</p>
-      </a>
-      <a href="#" class="group">
-        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-          <img src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg" alt="Hand holding black machined steel mechanical pencil with brass tip and top." class="h-full w-full object-cover object-center group-hover:opacity-75">
-        </div>
-        <h3 class="mt-4 text-sm text-gray-700">Machined Mechanical Pencil</h3>
-        <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
-      </a>
-
-      <!-- More products... -->
     </div>
-  </div>
-</div>
-<!--FIM DOS PRODUTOS-->
 
-<!--FOOTER-->
+    <!--FIM DOS PRODUTOS-->
+    <!--FOOTER-->
     <footer class="bg-gray-800 text-white">
         <div class="container mx-auto py-8 flex flex-wrap justify-center">
             <!-- Seção de Links Rápidos -->

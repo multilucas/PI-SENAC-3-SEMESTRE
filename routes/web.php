@@ -13,11 +13,10 @@ Route::get('/login', 'Auth\AuthenticatedSessionController@create')->name('login'
 Route::post('/login', 'Auth\AuthenticatedSessionController@store');
 Route::get('/register', 'Auth\RegisteredUserController@create')->name('register');
 Route::post('/register', 'Auth\RegisteredUserController@store');
-Route::get('/categoria/{categoria}', [ProdutoController::class, 'showByCategory'])->name('categoria.show');
 
-Route::get('/produtos', [ProdutoController::class, 'index'])->name('produtos');
-
-Route::get('/produtos/{categoria?}', [ProdutoController::class, 'index'])->name('produtos.categoria');
+Route::get('/produtos', [ProdutoController::class, 'indexNaProdutos'])->name('produtos');
+Route::get('/produtos/{categoria?}', [ProdutoController::class, 'indexNaProdutos'])->name('produtos.categoria');
+Route::get('/produto/{id}', [ProdutoController::class, 'show'])->name('produto.show');
 
 //autenticados
 Route::middleware('auth')->group(function () {
