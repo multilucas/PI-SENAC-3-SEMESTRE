@@ -108,7 +108,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($carrinhoItens as $carrinhoItem)
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <img class="p-8 rounded-t-lg w-full h-60 cursor-pointer" src="{{ $carrinhoItem->produto->imagem->first()->IMAGEM_URL ?? '' }}" alt="product image" />
+                    @foreach($carrinhoItem->produto->imagens as $imagem)
+                    <img class="p-8 rounded-t-lg w-full h-60 cursor-pointer" src="{{ $imagem->IMAGEM_URL ?? '' }}" alt="product image" />
+                    @endforeach
                     <h2 class="text-xl font-semibold mb-2">{{ $carrinhoItem->produto->PRODUTO_NOME }}</h2>
                     <p class="text-gray-600 mb-4">{{ $carrinhoItem->produto->PRODUTO_DESCRICAO }}</p>
                     <p class="text-gray-800 font-bold">{{ $carrinhoItem->produto->PRODUTO_PRECO}}</p>
