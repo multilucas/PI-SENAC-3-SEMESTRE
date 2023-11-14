@@ -39,7 +39,7 @@
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton">
                                     @foreach($categorias as $categoria)
                                     <li>
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ $categoria->CATEGORIA_NOME}}</a>
+                                        <a href="{{route('produtos.categoria', $categoria->CATEGORIA_NOME)}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ $categoria->CATEGORIA_NOME}}</a>
                                     </li>
                                     @endforeach
 
