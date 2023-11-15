@@ -28,7 +28,7 @@
 
         <!--nav content-->
 
-            <x-navbar :categorias='$categorias'/>
+        <x-navbar :categorias='$categorias' />
 
         <!-- end - nav content -->
 
@@ -37,25 +37,26 @@
             <h1 class="text-3xl font-semibold mb-4">Seu Carrinho</h1>
 
             <!-- Lista de Produtos no Carrinho -->
-           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($carrinhoItens as $carrinhoItem)
                 <div class="bg-white p-6 rounded-lg shadow-md">
 
-                    <img class="p-8 rounded-t-lg w-full h-60 cursor-pointer" src="{{$carrinhoItem->produto->imagens->first()->IMAGEM_URL}}" alt="product image" />
+                    <img class="rounded-t-lg w-full h-60 cursor-pointer" src="{{$carrinhoItem->produto->imagens->first()->IMAGEM_URL}}" alt="product image" />
 
                     <h2 class="text-xl font-semibold mb-2">{{ $carrinhoItem->produto->PRODUTO_NOME }}</h2>
-                    <p class="text-gray-600 mb-4">{{ $carrinhoItem->produto->PRODUTO_DESCRICAO }}</p>
-                    <p class="text-gray-800 font-bold">{{ $carrinhoItem->produto->PRODUTO_PRECO}}</p>
-                    <form>
-                        <input type="number" value="{{ old('quantidade_itens',$carrinhoItem->ITEM_QTD)}}">
-                        <button type="submit">Atualizar quantidade</button>
+                    <p class="text-xl text-gray-800 font-bold">{{ $carrinhoItem->produto->PRODUTO_PRECO}}</p>
+
+                    <form class="flex items-center">
+                        <input type="number" name="quantidade_itens" value="{{ old('quantidade_itens', $carrinhoItem->ITEM_QTD) }}" class="border rounded-l px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-300">
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-700 text-sm">
+                            Atualizar
+                        </button>
                     </form>
                 </div>
                 @endforeach
             </div>
 
         </div>
-
         <!-- INICIO FOOTER -->
         <footer class="bg-gray-800 text-white">
             <div class="container mx-auto py-8 flex flex-wrap justify-center">
