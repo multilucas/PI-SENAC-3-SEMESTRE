@@ -22,7 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2"></script>
 </head>
 
-<body x-data="{ isCartOpen: false }">
+<body>
     <!--Nav Bar-->
     <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
 
@@ -46,6 +46,10 @@
                     <h2 class="text-xl font-semibold mb-2">{{ $carrinhoItem->produto->PRODUTO_NOME }}</h2>
                     <p class="text-gray-600 mb-4">{{ $carrinhoItem->produto->PRODUTO_DESCRICAO }}</p>
                     <p class="text-gray-800 font-bold">{{ $carrinhoItem->produto->PRODUTO_PRECO}}</p>
+                    <form>
+                        <input type="number" value="{{ old('quantidade_itens',$carrinhoItem->ITEM_QTD)}}">
+                        <button type="submit">Atualizar quantidade</button>
+                    </form>
                 </div>
                 @endforeach
             </div>

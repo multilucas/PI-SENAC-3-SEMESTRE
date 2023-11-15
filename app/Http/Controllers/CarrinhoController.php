@@ -30,19 +30,14 @@ class CarrinhoController extends Controller
         }
     }
 
-    public function index()
-    {
+    public function index(){
         // Recupere os itens do carrinho do usuário autenticado
         $categorias = Categoria::all();
-        $carrinhoItens = Carrinho::with('produto.imagens') // Carregar dados do produto e da imagem
-            ->where('USUARIO_ID', auth()->user()->USUARIO_ID)
-            ->get();
-
-        // Verifique se os dados estão sendo recuperados corretamente
-        // dd($carrinhoItens);
-
+        $carrinhoItens = Carrinho::with('produto.imagens')->where('USUARIO_ID', auth()->user()->USUARIO_ID)->get();
         return view('carrinho.index', compact('carrinhoItens', 'categorias'));
     }
+
+    
     public function removerDoCarrinho($carrinhoItemId)
     {
         $carrinhoItem = Carrinho::find($carrinhoItemId);
