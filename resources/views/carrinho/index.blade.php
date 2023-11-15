@@ -25,16 +25,13 @@
 <body>
     <!--Nav Bar-->
     <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
-
-        <!--nav content-->
-
         <x-navbar :categorias='$categorias' />
+        <!--Nav Bar-->
 
-        <!-- end - nav content -->
 
         <!-- Conteúdo do Carrinho -->
         <div class="container mx-auto mt-8">
-            <h1 class="text-3xl font-semibold mb-4">Seu Carrinho</h1>
+            <h1 class="text-3xl font-semibold mb-4 text-white">Seu Carrinho</h1>
 
             <!-- Lista de Produtos no Carrinho -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -46,7 +43,12 @@
                     <h2 class="text-xl font-semibold mb-2">{{ $carrinhoItem->produto->PRODUTO_NOME }}</h2>
                     <p class="text-xl text-gray-800 font-bold">{{ $carrinhoItem->produto->PRODUTO_PRECO}}</p>
 
-                    <form class="flex items-center">
+                    <form class="flex items-center" method="post" action="">
+                        @csrf
+                        <!-- Add hidden inputs for each item in the cart -->
+                        <input type="hidden" name="produto_id[]" value="{{ $carrinhoItem->produto->id }}">
+                        <input type="hidden" name="quantidade_itens[]" value="{{ old('quantidade_itens', $carrinhoItem->ITEM_QTD) }}">
+
                         <input type="number" name="quantidade_itens" value="{{ old('quantidade_itens', $carrinhoItem->ITEM_QTD) }}" class="border rounded-l px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-300">
                         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-700 text-sm">
                             Atualizar
@@ -56,10 +58,19 @@
                 @endforeach
             </div>
 
+            <!-- Button to submit the form and go to the order page -->
+            <form method="post" action="">
+                @csrf
+                <!-- Add any additional hidden inputs or form data needed for the order page -->
+                <button type="submit" class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
+                    Finalizar Pedido
+                </button>
+            </form>
         </div>
+
         <!-- INICIO FOOTER -->
         <footer class="bg-gray-800 text-white">
-            <div class="container mx-auto py-8 flex flex-wrap justify-center">
+            <div class="container mx-auto py-8 mt-10 flex flex-wrap justify-center">
                 <!-- Seção de Links Rápidos -->
                 <div class="w-full sm:w-1/2 md:w-1/4 lg:w-1/5 mb-6">
                     <h2 class="text-xl font-semibold mb-4">Links Rápidos</h2>
