@@ -43,7 +43,6 @@ class ProdutoController extends Controller
 
     public function show($id)
     {
-        $produto = Produto::with('imagensOrdenadas', 'categoria')->findOrFail($id);
-        return view('produto.produto', compact('produto'));
+        return view('produto.produto',['produto'=>Produto::with('imagensOrdenadas', 'categoria')->findOrFail($id), 'categorias'=> Categoria::all()]);
     }
 }

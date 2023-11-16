@@ -23,6 +23,14 @@
 </head>
 
 <body>
+
+    <!--Nav Bar-->
+    <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+        <x-navbar :categorias='$categorias' />
+    </nav>
+        <!--Nav Bar-->
+
+
     <div class="bg-gray-900">
         <div class="pt-6">
             <nav aria-label="Breadcrumb">
@@ -77,9 +85,11 @@
                 <!-- Options -->
                 <div class="mt-4 lg:row-span-3 lg:mt-0">
                     <h2 class="sr-only">Product information</h2>
-                    <p class="text-3xl tracking-tight text-white">R${{ $produto->PRODUTO_PRECO}}</p>
                     @if($produto->PRODUTO_DESCONTO > 0)
+                    <p class="text-3xl tracking-tight text-white">R$ <s>{{ $produto->PRODUTO_PRECO}}</s></p>
                     <p class="text-3xl tracking-tight text-white">DESCONTO: R${{ $produto->PRODUTO_DESCONTO}}</p>
+                    <p class="text-3xl tracking-tight text-white">R$ {{ $produto->PRODUTO_PRECO - $produto->PRODUTO_DESCONTO}}</p>
+
                     @else
 
                     <p class="text-3xl tracking-tight text-white"></p>
