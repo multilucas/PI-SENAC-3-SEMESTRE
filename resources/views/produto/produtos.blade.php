@@ -134,7 +134,7 @@
                     <p class="mt-1 text-lg font-medium text-white">{{$produto->PRODUTO_PRECO}}</p>
                 </a>
                 @endforeach
-
+                {{ $produtos->links() }}
             </div>
         </div>
     </div>
