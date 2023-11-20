@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\User;
 use App\Models\Endereco;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +18,7 @@ class EnderecoController extends Controller
         return view('profile.enderecos', ['endereco' => $request->usuario]);
     }
 
-    public function store(Request $request, User $id)
-    {
+    public function store(Request $request, User $id){
         Endereco::create([
             'USUARIO_ID' => $id->USUARIO_ID,
             'ENDERECO_NOME' => $request->input('ENDERECO_NOME'),
@@ -28,8 +28,27 @@ class EnderecoController extends Controller
             'ENDERECO_CEP' => $request->input('ENDERECO_CEP'),
             'ENDERECO_CIDADE' => $request->input('ENDERECO_CIDADE'),
             'ENDERECO_ESTADO' => $request->input('ENDERECO_ESTADO')
-    ]);
-        return redirect("/");
+        ]);
+        return redirect(route('endereco.index', Auth::id()));
+    }
+
+    public function index(User $id){
+        $enderecosUsuario = Endereco::all()->where('USUARIO_ID', $id->USUARIO_ID);
+        return view('profile.enderecosIndex', [
+                'enderecosUsuario' => $enderecosUsuario,
+                'categorias' => Categoria::all(),
+                'user' => Auth::user()
+            ]);
+    }
+
+        public function edit(Endereco $id)
+    {
+        $enderecoUsuario = Endereco::find($id->ENDERECO_ID);
+        return view('profile.enderecoEdit', [
+            'enderecoUsuario' => $enderecoUsuario,
+            'categorias' => Categoria::all(),
+            'user' => Auth::user()
+        ]);
     }
 
 }

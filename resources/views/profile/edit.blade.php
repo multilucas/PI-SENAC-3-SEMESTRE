@@ -29,7 +29,7 @@
         <h2 class="text-2xl font-semibold mb-4">Informações Usuário</h2>
         <ul>
             <li><a href="{{route('profile.edit')}}">Perfil</a></li>
-            <li><a href="{{route( 'endereco.create')}}">Endereços</a></li>
+            <li><a href="{{route( 'endereco.index', Auth::id())}}">Endereços</a></li>
             <li><a href="#">Carrinho</a></li>
         </ul>
     </div>
