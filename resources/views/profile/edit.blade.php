@@ -29,7 +29,7 @@
         <h2 class="text-2xl font-semibold mb-4">Informações Usuário</h2>
         <ul>
             <li><a href="{{route('profile.edit')}}">Perfil</a></li>
-            <li><a href="{{route( 'endereco.edit')}}">Endereços</a></li>
+            <li><a href="{{route( 'endereco.create')}}">Endereços</a></li>
             <li><a href="#">Carrinho</a></li>
         </ul>
     </div>
@@ -45,25 +45,25 @@
                     <label class="block text-sm font-bold mb-2" for="USUARIO_NOME">
                         Nome
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline" type="text" name="USUARIO_NOME" value="{{ $user->USUARIO_NOME }}">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="USUARIO_NOME" value="{{ $user->USUARIO_NOME }}">
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-bold mb-2" for="USUARIO_EMAIL">
                         Email
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline" type="text" name="USUARIO_EMAIL" value="{{ $user->USUARIO_EMAIL}}">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="USUARIO_EMAIL" value="{{ $user->USUARIO_EMAIL}}">
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-bold mb-2" for="USUARIO_SENHA">
                         Senha
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline" type="password" name="USUARIO_SENHA" }}">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" name="USUARIO_SENHA" }}">
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-bold mb-2" for="USUARIO_CPF">
                         CPF
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline" type="text" name="USUARIO_CPF" value="{{ $user->USUARIO_CPF}}">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="USUARIO_CPF" value="{{ $user->USUARIO_CPF}}">
                 </div>
 
                 <div class="flex items-center justify-between">

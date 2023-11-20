@@ -12,6 +12,7 @@ Route::get('/', [ProdutoController::class, 'index'])->name('produtos.main');
 
 Route::get('/login', 'Auth\AuthenticatedSessionController@create')->name('login');
 Route::post('/login', 'Auth\AuthenticatedSessionController@store');
+
 Route::get('/register', 'Auth\RegisteredUserController@create')->name('register');
 Route::post('/register', 'Auth\RegisteredUserController@store');
 
@@ -25,7 +26,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-    Route::get('/profile/enderecos', [EnderecoController::class, 'edit'])->name('endereco.edit');
+
+    Route::get('/profile/enderecos', [EnderecoController::class, 'create'])->name('endereco.create');
+    Route::post('/profile/enderecos/{id}', [EnderecoController::class, 'store'])->name('endereco.store');
+
     Route::get('/adicionar-ao-carrinho/{produtoId}', [CarrinhoController::class, 'adicionarAoCarrinho'])->name('adicionar-ao-carrinho');
     Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
 });
