@@ -13,9 +13,12 @@ use Illuminate\View\View;
 
 class EnderecoController extends Controller
 {
-    public function create(Request $request): View
+    public function create(User $id)
     {
-        return view('profile.enderecos', ['endereco' => $request->usuario]);
+        return view('profile.enderecos', [
+            'categorias' => Categoria::all(),
+            'user' => $id
+        ]);
     }
 
     public function store(Request $request, User $id){
