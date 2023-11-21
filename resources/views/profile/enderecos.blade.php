@@ -11,7 +11,7 @@
                 extend: {
                     colors: {
                         clifford: '#da373d',
-                    }
+                    },
                 }
             }
         }
@@ -37,6 +37,8 @@
             <li><a href="{{route('profile.edit')}}">Perfil</a></li>
             <li><a href="{{route( 'endereco.index', Auth::id() )}}">Endereços</a></li>
             <li><a href="#">Carrinho</a></li>
+            <li><a href="#">Pedidos</a></li>
+
         </ul>
     </div>
 

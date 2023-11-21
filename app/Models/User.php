@@ -14,7 +14,7 @@ class User extends Authenticatable
     protected $table= "USUARIO";
     public $timestamps = false;
     protected $primaryKey = "USUARIO_ID";
-    
+
     protected $fillable = [
         'USUARIO_NOME',
         'USUARIO_EMAIL',
@@ -24,4 +24,9 @@ class User extends Authenticatable
     protected $hidden = [
         'USUARIO_SENHA'
     ];
+
+    public function pedidos()
+{
+    return $this->hasMany(Pedido::class, 'USUARIO_ID', 'USUARIO_ID');
+}
 }

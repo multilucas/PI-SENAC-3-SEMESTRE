@@ -27,10 +27,6 @@
         <x-navbar :categorias='$categorias' />
     </nav>
         <!--FIM Nav Bar-->
-
-
-
-
     <!-- Menu Lateral -->
     <div class="ml-10 w-1/4 bg-gray-800 p-4">
         <!-- Conteúdo do menu lateral -->
@@ -39,6 +35,7 @@
             <li><a href="{{route('profile.edit')}}"class="text-blue-500">Perfil</a></li>
             <li><a href="{{route( 'endereco.index', Auth::id())}}"class="text-blue-500">Endereços</a></li>
             <li><a href="{{route('carrinho.index')}}" class="text-blue-500">Carrinho</a></li>
+            <li><a href="{{route('pedidos.index')}}" class="text-blue-500">Pedidos</a></li>
         </ul>
     </div>
 <!-- Fim Menu Lateral -->
