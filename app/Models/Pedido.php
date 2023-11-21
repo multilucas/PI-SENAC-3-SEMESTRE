@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Endereco;
 
 class Pedido extends Model
 {
@@ -13,6 +16,7 @@ class Pedido extends Model
     protected $primaryKey = "PEDIDO_ID";
     public $timestamps = false;
     protected $fillable = [
+        'PEDIDO_ID',
         'USUARIO_ID',
         'ENDERECO_ID',
         'STATUS_ID',
@@ -26,6 +30,6 @@ class Pedido extends Model
 
     public function endereco()
     {
-        return $this->belongsTo(Endereco::class, 'ENDE RECO_ID');
+        return $this->belongsTo(Endereco::class, 'ENDERECO_ID');
     }
 }

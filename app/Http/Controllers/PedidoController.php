@@ -9,9 +9,11 @@ class PedidoController extends Controller
 {
     public function index()
     {
-        $userId = auth()->user()->id;
+        $user = auth()->user();
 
-        $pedidos = Pedido::where('USUARIO_ID', $userId)->get();
+
+        $pedidos = $user->pedido;
+        
 
         return view('pedido.index', compact('pedidos'));
     }
