@@ -59,7 +59,7 @@
                     @foreach ($enderecosUsuario as $endereco)
                     <tr>
                         <td class="py-4 px-6">
-                            <a href="{{ route('endereco.editar', Auth::id()) }}" class="block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+                            <a href="{{ route('endereco.editar', $endereco->ENDERECO_ID) }}" class="block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
                                 Editar
                             </a>
                         </td>

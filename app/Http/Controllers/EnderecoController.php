@@ -41,8 +41,7 @@ class EnderecoController extends Controller
             ]);
     }
 
-        public function edit(Endereco $id)
-    {
+        public function edit(Endereco $id){
         $enderecoUsuario = Endereco::find($id->ENDERECO_ID);
         return view('profile.enderecoEdit', [
             'enderecoUsuario' => $enderecoUsuario,
@@ -50,5 +49,29 @@ class EnderecoController extends Controller
             'user' => Auth::user()
         ]);
     }
+
+    public function update(Request $request, Endereco $id)
+    {
+        $request->validate([
+            'ENDERECO_NOME' => ['required'],
+            'ENDERECO_LOGRADOURO' => ['required'],
+            'ENDERECO_NUMERO' => ['required', 'numeric'],
+            'ENDERECO_CEP' => ['required', 'max:8'],
+            'ENDERECO_CIDADE' => ['required'],
+            'ENDERECO_ESTADO' => ['required', 'max:2'],
+        ]);
+        $id->update([
+            'ENDERECO_NOME' => $request->ENDERECO_NOME,
+            'ENDERECO_LOGRADOURO' => $request->ENDERECO_LOGRADOURO,
+            'ENDERECO_NUMERO' => $request->ENDERECO_NUMERO,
+            'ENDERECO_COMPLEMENTO' => $request->ENDERECO_COMPLEMENTO,
+            'ENDERECO_CEP' => $request->ENDERECO_CEP,
+            'ENDERECO_CIDADE' => $request->ENDERECO_CIDADE,
+            'ENDERECO_ESTADO' => $request->ENDERECO_ESTADO
+        ]);
+        return redirect(route('endereco.index', $id->USUARIO_ID));
+    }
+
+    
 
 }
