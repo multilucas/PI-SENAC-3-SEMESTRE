@@ -21,8 +21,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2"></script>
 </head>
-
 <body class="bg-gray-900 text-white flex items-center justify-center h-screen dark:bg-gray-900 dark:text-gray-200">
+
+    <!--Nav Bar-->
+    <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 fixed top-0 w-full">
+        <x-navbar :categorias='$categorias' />
+    </nav>
+        <!--FIM Nav Bar-->
+
+
     <!-- Menu Lateral -->
     <div class="ml-4 w-1/4 bg-gray-800 p-4">
         <!-- Conteúdo do menu lateral -->
@@ -30,18 +37,18 @@
         <ul>
             <li><a href="{{ route('profile.edit') }}" class="text-blue-500">Perfil</a></li>
             <li><a href="{{ route('endereco.index', Auth::id()) }}" class="text-blue-500">Endereços</a></li>
-            <li><a href="#" class="text-blue-500">Carrinho</a></li>
+            <li><a href="{{route('carrinho.index')}}" class="text-blue-500">Carrinho</a></li>
         </ul>
     </div>
 
-    <div class="max-w-screen-md mx-auto p-4">
+    <div class="max-w-screen-md mx-auto p-4 mt-18">
         <div class="bg-gray-700 dark:bg-gray-800 shadow-md rounded p-8 mb-4">
             <div class="mb-8 text-center">
                 <h2 class="text-2xl font-semibold">Editar Perfil</h2>
             </div>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto mt-18">
             <table class="min-w-full bg-white dark:bg-gray-800 rounded shadow-md">
                 <thead class="bg-gray-200 dark:bg-gray-700">
                     <tr>

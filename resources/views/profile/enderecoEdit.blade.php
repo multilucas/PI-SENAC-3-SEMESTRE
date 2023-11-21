@@ -28,9 +28,9 @@
         <!-- Conteúdo do menu lateral -->
         <h2 class="text-2xl font-semibold mb-4">Informações Usuário</h2>
         <ul>
-            <li><a href="{{route('profile.edit')}}">Perfil</a></li>
-            <li><a href="{{route( 'endereco.index', Auth::id() )}}">Endereços</a></li>
-            <li><a href="#">Carrinho</a></li>
+            <li><a href="{{route('profile.edit')}}"class="text-blue-500">Perfil</a></li>
+            <li><a href="{{route( 'endereco.index', Auth::id() )}}"class="text-blue-500">Endereços</a></li>
+            <li><a href="{{route('carrinho.index')}}"class="text-blue-500">Carrinho</a></li>
         </ul>
     </div>
 
