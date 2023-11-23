@@ -22,7 +22,7 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2"></script>
 </head>
 
-<body ">
+<body >
     <!--Nav Bar-->
     <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
         <x-navbar :categorias='$categorias' />
