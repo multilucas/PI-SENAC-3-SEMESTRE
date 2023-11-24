@@ -12,12 +12,12 @@ class PedidoStatus extends Model
 	public $timestamps = false;
 
 	protected $fillable = [
-	
+
 		'STATUS_DESC'
 	];
 
 	public function pedidos()
 	{
-		return $this->hasMany(PEDIDO::class, 'STATUS_ID');
+		return $this->hasMany(Pedido::class, 'STATUS_ID');
 	}
 }

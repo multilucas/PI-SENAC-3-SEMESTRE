@@ -11,6 +11,7 @@ class PedidoItem extends Model
 
     protected $table = "PEDIDO_ITEM";
     protected $primaryKey = ['PRODUTO_ID', 'PEDIDO_ID'];
+    public $incrementing = false;
     public $timestamps = false;
 
     protected $fillable = [

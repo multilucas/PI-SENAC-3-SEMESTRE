@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use App\Models\Carrinho;
+use App\Models\Produto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CarrinhoController extends Controller
 {
@@ -47,5 +49,37 @@ class CarrinhoController extends Controller
             $carrinhoItem->delete();
         }
         return redirect()->route('carrinho.index')->with('success', 'Produto removido do carrinho.');
+    }
+
+
+    public function delete($produto)
+    {
+        $user = auth()->user();
+        $item = Carrinho::where('USUARIO_ID', $user->USUARIO_ID)
+            ->where('PRODUTO_ID', $produto)
+            ->first();
+
+        if ($item) {
+            $item->ITEM_QTD = 0;
+            $item->save();
+        }
+
+        return Redirect::back();
+    }
+
+
+    public function update(Request $request)
+    {
+        $user = auth()->user();
+        $item = Carrinho::where('USUARIO_ID', $user->USUARIO_ID)
+            ->where('PRODUTO_ID', $request->input('produto_id'))
+            ->first();
+
+        if ($item) {
+            $item->ITEM_QTD = $request->input('quantidade_itens');
+            $item->save();
+        }
+
+        return Redirect::back();
     }
 }

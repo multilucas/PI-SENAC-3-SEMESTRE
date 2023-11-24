@@ -40,23 +40,22 @@
             <!-- Lista de Produtos no Carrinho -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($carrinhoItens as $carrinhoItem)
-                <div class="bg-white p-6 rounded-lg shadow-md">
+                    @if($carrinhoItem->ITEM_QTD > 0)
+                    <div class="bg-white p-6 rounded-lg shadow-md">
 
-                    <img class="rounded-t-lg w-full h-60 cursor-pointer"
-                    src="{{ $carrinhoItem->produto->imagens->first()->IMAGEM_URL }}" alt="product image" />
+                        <img class="rounded-t-lg w-full h-60 cursor-pointer"
+                            src="{{ $carrinhoItem->produto->imagens->first()->IMAGEM_URL }}" alt="product image" />
 
-                    <h2 class="text-xl font-semibold mb-2">{{ $carrinhoItem->produto->PRODUTO_NOME }}</h2>
-                    <p class="text-xl text-gray-800 font-bold">{{ $carrinhoItem->produto->PRODUTO_PRECO }}</p>
+                        <h2 class="text-xl font-semibold mb-2">{{ $carrinhoItem->produto->PRODUTO_NOME }}</h2>
+                        <a href="{{ route('delete.carrinho', $carrinhoItem->produto->PRODUTO_ID) }}">remover</a>
+                        <!--Formulario para atualizar-->
+                        <form class="flex items-center" method="get" action="{{ route('update.carrinho') }}">
+                            @csrf
+                            <input type="hidden" name="produto_id" value="{{ $carrinhoItem->produto->PRODUTO_ID }}">
 
-                    <form class="flex items-center" method="post" action="">
-                        @csrf
 
-                        <input type="hidden" name="produto_id[]" value="{{ $carrinhoItem->produto->id }}">
-                        <input type="hidden" name="quantidade_itens[]"
-                        value="{{ old('quantidade_itens', $carrinhoItem->ITEM_QTD) }}">
-
-                        <input type="number" name="quantidade_itens"
-                        value="{{ old('quantidade_itens', $carrinhoItem->ITEM_QTD) }}"
+                            <input type="number" name="quantidade_itens"
+                                value="{{ old('quantidade_itens', $carrinhoItem->ITEM_QTD) }}"
                                 class="border rounded-l px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-300">
                             <button type="submit"
                                 class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-700 text-sm">
@@ -64,13 +63,15 @@
                             </button>
                         </form>
                     </div>
+                    @endif
                 @endforeach
             </div>
 
             <!-- Button to submit the form and go to the order page -->
-            <form method="post" action="{{route('criar.pedido')}}">
+            <form method="post" action="{{ route('criar.pedido') }}">
                 @csrf
-                <select name="ENDERECO_ID" id="endereco" class="form-control bg-white border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal">
+                <select name="ENDERECO_ID" id="endereco"
+                    class="form-control bg-white border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal">
                     @foreach ($enderecos as $endereco)
                         <option value="{{ $endereco->ENDERECO_ID }}">
                             {{ $endereco->ENDERECO_NOME }},
@@ -143,6 +144,6 @@
                 </div>
             </div>
         </footer>
-    </body>
+</body>
 
 </html>

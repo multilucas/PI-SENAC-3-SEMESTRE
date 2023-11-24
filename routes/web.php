@@ -38,7 +38,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/adicionar-ao-carrinho/{produtoId}', [CarrinhoController::class, 'adicionarAoCarrinho'])->name('adicionar-ao-carrinho');
     Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
-
+    Route::get('/carrinho/atualizar', [CarrinhoController::class, 'update'])->name('update.carrinho');
+    Route::get('/carrinho/remover/{ITEM_ID}', [CarrinhoController::class, 'delete'])->name('delete.carrinho');
 
 
     Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
