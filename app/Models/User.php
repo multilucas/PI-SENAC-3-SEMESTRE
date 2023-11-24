@@ -11,7 +11,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table= "USUARIO";
+    protected $table = "USUARIO";
     public $timestamps = false;
     protected $primaryKey = "USUARIO_ID";
 
@@ -26,7 +26,12 @@ class User extends Authenticatable
     ];
 
     public function pedido()
-{
-    return $this->hasMany(Pedido::class, 'USUARIO_ID', 'USUARIO_ID');
-}
+    {
+        return $this->hasMany(Pedido::class, 'USUARIO_ID', 'USUARIO_ID');
+    }
+
+    public function endereco()
+    {
+        return $this->hasMany(Endereco::class, 'USUARIO_ID', 'USUARIO_ID');
+    }
 }

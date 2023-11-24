@@ -10,12 +10,30 @@ class PedidoItem extends Model
     use HasFactory;
 
     protected $table = "PEDIDO_ITEM";
-    protected $primaryKey = "";//criar relacionamento de chave estrangeira
+    protected $primaryKey = ['PRODUTO_ID', 'PEDIDO_ID'];
     public $timestamps = false;
+
+    protected $fillable = [
+        'PRODUTO_ID',
+        'PEDIDO_ID',
+        'ITEM_QTD',
+        'ITEM_PRECO'
+    ];
+
 
     public function pedido()
     {
         return $this->belongsTo(Pedido::class, 'PEDIDO_ID');
     }
 
+    public function produto()
+    {
+        return $this->belongsTo(Produto::class, 'PRODUTO_ID');
+    }
+
+    protected function setKeysForSaveQuery($query)
+    {
+        return $query->where('PEDIDO_ID', $this->getAttribute('PEDIDO_ID'))
+            ->where('PRODUTO_ID', $this->getAttribute('PRODUTO_ID'));
+    }
 }

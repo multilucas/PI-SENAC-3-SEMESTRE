@@ -30,14 +30,16 @@ class CarrinhoController extends Controller
             return redirect()->route('login')->with('error', 'Você precisa fazer login para adicionar produtos ao carrinho.');
         }
     }
-    public function index(){
+
+    public function index()
+    {
         // Recupere os itens do carrinho do usuário autenticado
         $categorias = Categoria::all();
         $carrinhoItens = Carrinho::with('produto.imagens')->where('USUARIO_ID', auth()->user()->USUARIO_ID)->get();
-        return view('carrinho.index', compact('carrinhoItens', 'categorias'));
+        $enderecos = auth()->user()->endereco;
+        return view('carrinho.index', compact('carrinhoItens', 'categorias', 'enderecos'));
     }
 
-    
     public function removerDoCarrinho($carrinhoItemId)
     {
         $carrinhoItem = Carrinho::find($carrinhoItemId);

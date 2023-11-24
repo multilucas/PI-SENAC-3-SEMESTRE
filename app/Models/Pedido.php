@@ -15,6 +15,7 @@ class Pedido extends Model
     protected $table = "PEDIDO";
     protected $primaryKey = "PEDIDO_ID";
     public $timestamps = false;
+
     protected $fillable = [
         'PEDIDO_ID',
         'USUARIO_ID',
@@ -32,4 +33,14 @@ class Pedido extends Model
     {
         return $this->belongsTo(Endereco::class, 'ENDERECO_ID');
     }
+
+    public function pedidoStatus()
+	{
+		return $this->belongsTo(PedidoStatus::class, 'STATUS_ID');
+	}
+
+    public function pedidoItem()
+	{
+		return $this->hasOne(PedidoItem::class, 'PEDIDO_ID');
+	}
 }

@@ -27,7 +27,11 @@
     <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
         <x-navbar :categorias='$categorias' />
         <!--Nav Bar-->
+        <!-- Escolha do Endereço -->
+        <div class="container mx-auto mt-8">
+            <h2 class="text-2xl font-semibold mb-4 text-white">Escolha o endereço de entrega</h2>
 
+        </div>
 
         <!-- Conteúdo do Carrinho -->
         <div class="container mx-auto mt-8">
@@ -35,33 +39,50 @@
 
             <!-- Lista de Produtos no Carrinho -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach($carrinhoItens as $carrinhoItem)
+                @foreach ($carrinhoItens as $carrinhoItem)
                 <div class="bg-white p-6 rounded-lg shadow-md">
 
-                    <img class="rounded-t-lg w-full h-60 cursor-pointer" src="{{$carrinhoItem->produto->imagens->first()->IMAGEM_URL}}" alt="product image" />
+                    <img class="rounded-t-lg w-full h-60 cursor-pointer"
+                    src="{{ $carrinhoItem->produto->imagens->first()->IMAGEM_URL }}" alt="product image" />
 
                     <h2 class="text-xl font-semibold mb-2">{{ $carrinhoItem->produto->PRODUTO_NOME }}</h2>
-                    <p class="text-xl text-gray-800 font-bold">{{ $carrinhoItem->produto->PRODUTO_PRECO}}</p>
+                    <p class="text-xl text-gray-800 font-bold">{{ $carrinhoItem->produto->PRODUTO_PRECO }}</p>
 
                     <form class="flex items-center" method="post" action="">
                         @csrf
-                        <!-- Add hidden inputs for each item in the cart -->
-                        <input type="hidden" name="produto_id[]" value="{{ $carrinhoItem->produto->id }}">
-                        <input type="hidden" name="quantidade_itens[]" value="{{ old('quantidade_itens', $carrinhoItem->ITEM_QTD) }}">
 
-                        <input type="number" name="quantidade_itens" value="{{ old('quantidade_itens', $carrinhoItem->ITEM_QTD) }}" class="border rounded-l px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-300">
-                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-700 text-sm">
-                            Atualizar
-                        </button>
-                    </form>
-                </div>
+                        <input type="hidden" name="produto_id[]" value="{{ $carrinhoItem->produto->id }}">
+                        <input type="hidden" name="quantidade_itens[]"
+                        value="{{ old('quantidade_itens', $carrinhoItem->ITEM_QTD) }}">
+
+                        <input type="number" name="quantidade_itens"
+                        value="{{ old('quantidade_itens', $carrinhoItem->ITEM_QTD) }}"
+                                class="border rounded-l px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-300">
+                            <button type="submit"
+                                class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-700 text-sm">
+                                Atualizar
+                            </button>
+                        </form>
+                    </div>
                 @endforeach
             </div>
 
             <!-- Button to submit the form and go to the order page -->
-            <form method="post" action="">
+            <form method="post" action="{{route('criar.pedido')}}">
                 @csrf
-                <!-- Add any additional hidden inputs or form data needed for the order page -->
+                <select name="ENDERECO_ID" id="endereco" class="form-control bg-white border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal">
+                    @foreach ($enderecos as $endereco)
+                        <option value="{{ $endereco->ENDERECO_ID }}">
+                            {{ $endereco->ENDERECO_NOME }},
+                            {{ $endereco->ENDERECO_LOGRADOURO }},
+                            {{ $endereco->ENDERECO_NUMERO }},
+                            {{ $endereco->ENDERECO_COMPLEMENTO ? $endereco->ENDERECO_COMPLEMENTO : ' ' }},
+                            {{ $endereco->ENDERECO_CEP }},
+                            {{ $endereco->ENDERECO_CIDADE }} -
+                            {{ $endereco->ENDERECO_ESTADO }}
+                        </option>
+                    @endforeach
+                </select>
                 <button type="submit" class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
                     Finalizar Pedido
                 </button>
@@ -107,8 +128,10 @@
                     <h2 class="text-xl font-semibold mb-4">Receba nossas Novidades</h2>
                     <p>Fique por dentro das últimas notícias e promoções.</p>
                     <form class="mt-4">
-                        <input type="email" class="w-full py-2 px-3 bg-gray-800 text-white rounded-md" placeholder="Seu e-mail">
-                        <button class="mt-2 bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600">Inscrever-se</button>
+                        <input type="email" class="w-full py-2 px-3 bg-gray-800 text-white rounded-md"
+                            placeholder="Seu e-mail">
+                        <button
+                            class="mt-2 bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600">Inscrever-se</button>
                     </form>
                 </div>
             </div>
@@ -120,6 +143,6 @@
                 </div>
             </div>
         </footer>
-</body>
+    </body>
 
 </html>

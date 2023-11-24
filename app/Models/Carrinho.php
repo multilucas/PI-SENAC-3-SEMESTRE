@@ -9,7 +9,7 @@ class Carrinho extends Model
 {
     use HasFactory;
     protected $table = "CARRINHO_ITEM";
-
+    //protected $primaryKey = ['PRODUTO_ID', 'USUARIO_ID'];
     public $timestamps = false;
     protected $fillable = [
             'USUARIO_ID',
@@ -26,4 +26,10 @@ class Carrinho extends Model
     {
         return $this->belongsTo(User::class, 'USUARIO_ID');
     }
+
+    protected function setKeysForSaveQuery($query){
+        return $query->where('USUARIO_ID', $this->getAttribute('USUARIO_ID'))
+                     ->where('PRODUTO_ID', $this->getAttribute('PRODUTO_ID'));
+    }
+
 }
