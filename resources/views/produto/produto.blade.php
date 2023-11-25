@@ -86,7 +86,7 @@
                 <div class="mt-4 lg:row-span-3 lg:mt-0">
                     <h2 class="sr-only">Product information</h2>
                     @if($produto->PRODUTO_DESCONTO > 0)
-                    <p class="text-3xl tracking-tight text-white">R$ <s>{{ $produto->PRODUTO_PRECO}}</s></p>
+                    <p class="text-3xl tracking-tight text-gray-400">R$ <s>{{ $produto->PRODUTO_PRECO}}</s></p>
                     <p class="text-3xl tracking-tight text-white">DESCONTO: R${{ $produto->PRODUTO_DESCONTO}}</p>
                     <p class="text-3xl tracking-tight text-white">R$ {{ $produto->PRODUTO_PRECO - $produto->PRODUTO_DESCONTO}}</p>
 
@@ -137,8 +137,8 @@
                                 </div>
                             </fieldset>
                         </div>
-
-                        <input type="number" name="quantidade_itens" value="" class="border mt-10 rounded-l px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-300">
+                        <label class="mt-5 flex  text-base font-medium text-white " for="quantidade_itens">Quantidade</label>
+                        <input type="number" name="quantidade_itens" value="" class="border mt-5 rounded-l px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-300">
 
                         <button type="submit" class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Adicionar ao Carrinho</button>
                     </form>

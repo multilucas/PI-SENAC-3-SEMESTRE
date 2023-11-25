@@ -17,6 +17,7 @@ class CarrinhoController extends Controller
             $carrinhoItem = Carrinho::where('USUARIO_ID', $user->USUARIO_ID)->where('PRODUTO_ID', $produtoId)->first();
 
             if ($carrinhoItem) {
+                $carrinhoItem->ITEM_QTD += $request->input('quantidade_itens');
                 $carrinhoItem->save();
                 return redirect()->route('carrinho.index');
             } else {
@@ -25,7 +26,8 @@ class CarrinhoController extends Controller
                     'PRODUTO_ID' => $produtoId,
                     'ITEM_QTD' =>  $request->input('quantidade_itens')
                 ]);
-                return redirect()->route('carrinho.index')->with('success', 'Produto adicionado ao carrinho.');
+
+                return redirect()->route('carrinho.index');
             }
         } else {
             // Se o usuário não estiver autenticado, redirecione para a página de login

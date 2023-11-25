@@ -27,11 +27,6 @@
     <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
         <x-navbar :categorias='$categorias' />
         <!--Nav Bar-->
-        <!-- Escolha do Endereço -->
-        <div class="container mx-auto mt-8">
-            <h2 class="text-2xl font-semibold mb-4 text-white">Escolha o endereço de entrega</h2>
-
-        </div>
 
         <!-- Conteúdo do Carrinho -->
         <div class="container mx-auto mt-8">
@@ -40,29 +35,31 @@
             <!-- Lista de Produtos no Carrinho -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($carrinhoItens as $carrinhoItem)
-                    @if($carrinhoItem->ITEM_QTD > 0)
-                    <div class="bg-white p-6 rounded-lg shadow-md">
+                    @if ($carrinhoItem->ITEM_QTD > 0)
+                        <div class="bg-white p-6 rounded-lg shadow-md">
 
-                        <img class="rounded-t-lg w-full h-60 cursor-pointer"
-                            src="{{ $carrinhoItem->produto->imagens->first()->IMAGEM_URL }}" alt="product image" />
+                            <img class="rounded-t-lg w-full h-60 cursor-pointer"
+                                src="{{ $carrinhoItem->produto->imagens->first()->IMAGEM_URL }}" alt="product image" />
 
-                        <h2 class="text-xl font-semibold mb-2">{{ $carrinhoItem->produto->PRODUTO_NOME }}</h2>
-                        <a href="{{ route('delete.carrinho', $carrinhoItem->produto->PRODUTO_ID) }}">remover</a>
-                        <!--Formulario para atualizar-->
-                        <form class="flex items-center" method="get" action="{{ route('update.carrinho') }}">
-                            @csrf
-                            <input type="hidden" name="produto_id" value="{{ $carrinhoItem->produto->PRODUTO_ID }}">
+                            <h2 class="text-xl font-semibold mb-2">{{ $carrinhoItem->produto->PRODUTO_NOME }}</h2>
+
+                            <!--Formulario para atualizar-->
+                            <form class="flex items-center" method="get" action="{{ route('update.carrinho') }}">
+                                @csrf
+                                <input type="hidden" name="produto_id"
+                                    value="{{ $carrinhoItem->produto->PRODUTO_ID }}">
 
 
-                            <input type="number" name="quantidade_itens"
-                                value="{{ old('quantidade_itens', $carrinhoItem->ITEM_QTD) }}"
-                                class="border rounded-l px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-300">
-                            <button type="submit"
-                                class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-700 text-sm">
-                                Atualizar
-                            </button>
-                        </form>
-                    </div>
+                                <input type="number" name="quantidade_itens"
+                                    value="{{ old('quantidade_itens', $carrinhoItem->ITEM_QTD) }}"
+                                    class="border rounded-l px-3 py-2 text-sm focus:outline-none focus:ring focus:border-blue-300 mb-7">
+                                <button type="submit"
+                                    class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-700 text-sm mb-7">
+                                    Atualizar
+                                </button>
+                            </form>
+                            <a class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-700 text-sm" href="{{ route('delete.carrinho', $carrinhoItem->produto->PRODUTO_ID) }} ">Remover do carrinho</a>
+                        </div>
                     @endif
                 @endforeach
             </div>
@@ -70,6 +67,12 @@
             <!-- Button to submit the form and go to the order page -->
             <form method="post" action="{{ route('criar.pedido') }}">
                 @csrf
+                <!-- Escolha do Endereço -->
+                <div class="container mx-auto mt-8">
+                    <h2 class="text-2xl font-semibold mb-4 text-white">Escolha o endereço de entrega</h2>
+
+                </div>
+
                 <select name="ENDERECO_ID" id="endereco"
                     class="form-control bg-white border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal">
                     @foreach ($enderecos as $endereco)

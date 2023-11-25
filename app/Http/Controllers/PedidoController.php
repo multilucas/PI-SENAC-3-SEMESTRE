@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\PedidoStatus;
 use App\Models\Carrinho;
+use App\Models\Categoria;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,13 +15,14 @@ class PedidoController extends Controller
     {
         $user = auth()->user();
         $pedidos = $user->pedido;
-        return view('pedido.index', compact('pedidos'));
+        $pedidoStatus = PedidoStatus::all();
+        $categorias = Categoria::all();
+        return view('pedido.index', compact('pedidos', 'categorias', 'pedidoStatus', 'user'));
     }
 
     public function store(Request $request){
 
         $user = Auth::id();
-
         $carrinho = Carrinho::all()->where('USUARIO_ID', Auth::user()->USUARIO_ID);
         $endereco = $request->ENDERECO_ID;
         $status = PedidoStatus::where('STATUS_ID', 1)->value('STATUS_ID');
@@ -34,7 +36,7 @@ class PedidoController extends Controller
         ]);
 
         $pedido_id = Pedido::orderBy('PEDIDO_ID', 'desc')->first()->PEDIDO_ID;
-
+        // Preenchendo a tabela de itens do pedido
         foreach ($carrinho as $item) {
             $precoProduto = ($item->produto->PRODUTO_PRECO - $item->produto->PRODUTO_DESCONTO) * $item->ITEM_QTD;
             $produto =  $item->produto->PRODUTO_ID;
@@ -49,9 +51,14 @@ class PedidoController extends Controller
                   'ITEM_QTD' => $quantidade,
                   'ITEM_PRECO' => $precoProduto
               ]);
-
+              $item->update(['ITEM_QTD' => 0]);
         }
+        return redirect(route('pedidos.index'));
+    }
 
+    public function delete($id){
+        $pedido = Pedido::find($id);
+        $pedido->update(['STATUS_ID' => 2]);
         return redirect(route('pedidos.index'));
     }
 }
