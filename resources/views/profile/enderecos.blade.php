@@ -27,83 +27,99 @@
     <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 fixed top-0 w-full">
         <x-navbar :categorias='$categorias' />
     </nav>
-        <!--FIM Nav Bar-->
+    <!--FIM Nav Bar-->
 
     <!-- Menu Lateral -->
     <div class="ml-10 w-1/4 bg-gray-800 p-4">
         <!-- Conteúdo do menu lateral -->
         <h2 class="text-2xl font-semibold mb-4">Informações Usuário</h2>
         <ul>
-            <li><a href="{{route('profile.edit')}}">Perfil</a></li>
-            <li><a href="{{route( 'endereco.index', Auth::id() )}}">Endereços</a></li>
-            <li><a href="#">Carrinho</a></li>
-            <li><a href="#">Pedidos</a></li>
-
+            <li><a href="{{ route('profile.edit') }}"class="text-blue-500">Perfil</a></li>
+            <li><a href="{{ route('endereco.index', Auth::id()) }}"class="text-blue-500">Endereços</a></li>
+            <li><a href="{{ route('carrinho.index') }}" class="text-blue-500">Carrinho</a></li>
+            <li><a href="{{ route('pedidos.index') }}" class="text-blue-500">Pedidos</a></li>
         </ul>
     </div>
+    <!-- Fim Menu Lateral -->
 
-<div class="max-w-md w-full mx-auto mt-16">
-    <div class="bg-gray-700 dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <div class="mb-8 text-center">
-            <h2 class="text-2xl font-semibold">Adicione um endereço de entrega</h2>
+    <div class="max-w-md w-full mx-auto mt-16">
+        <div class="bg-gray-700 dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-8 text-center">
+                <h2 class="text-2xl font-semibold">Adicione um endereço de entrega</h2>
+            </div>
+            <form method="POST" action="{{ route('endereco.store', Auth::id()) }}">
+                @csrf
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Primeira Coluna -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold mb-2" for="ENDERECO_NOME">
+                            Nome do Endereço
+                        </label>
+                        <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            type="text" name="ENDERECO_NOME">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold mb-2" for="ENDERECO_LOGRADOURO">
+                            Logradouro
+                        </label>
+                        <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            type="text" name="ENDERECO_LOGRADOURO">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold mb-2" for="ENDERECO_NUMERO">
+                            Numero
+                        </label>
+                        <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            type="text" name="ENDERECO_NUMERO">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold mb-2" for="ENDERECO_COMPLEMENTO">
+                            Complemento
+                        </label>
+                        <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            type="text" name="ENDERECO_COMPLEMENTO">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold mb-2" for="ENDERECO_CEP">
+                            CEP
+                        </label>
+                        <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            type="text" name="ENDERECO_CEP">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold mb-2" for="ENDERECO_CIDADE">
+                            Cidade
+                        </label>
+                        <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            type="text" name="ENDERECO_CIDADE">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-bold mb-2" for="ENDERECO_ESTADO">
+                            Estado
+                        </label>
+                        <input
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            type="text" name="ENDERECO_ESTADO">
+                    </div>
+                </div>
+
+                <!-- BOTAO DE ENVIO -->
+                <div class="flex items-center justify-end mt-4">
+                    <button
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit">
+                        Salvar Informações
+                    </button>
+                </div>
+            </form>
         </div>
-        <form method="POST" action="{{ route('endereco.store', Auth::id()) }}">
-            @csrf
-            <div class="grid grid-cols-2 gap-4">
-                <!-- Primeira Coluna -->
-                <div class="mb-4">
-                    <label class="block text-sm font-bold mb-2" for="ENDERECO_NOME">
-                        Nome do Endereço
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="ENDERECO_NOME">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-bold mb-2" for="ENDERECO_LOGRADOURO">
-                        Logradouro
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="ENDERECO_LOGRADOURO">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-bold mb-2" for="ENDERECO_NUMERO">
-                        Numero
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="ENDERECO_NUMERO">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-bold mb-2" for="ENDERECO_COMPLEMENTO">
-                        Complemento
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="ENDERECO_COMPLEMENTO">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-bold mb-2" for="ENDERECO_CEP">
-                        CEP
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="ENDERECO_CEP">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-bold mb-2" for="ENDERECO_CIDADE">
-                        Cidade
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="ENDERECO_CIDADE">
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-bold mb-2" for="ENDERECO_ESTADO">
-                        Estado
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="ENDERECO_ESTADO">
-                </div>
-            </div>
-
-            <!-- BOTAO DE ENVIO -->
-            <div class="flex items-center justify-end mt-4">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                    Salvar Informações
-                </button>
-            </div>
-        </form>
     </div>
-</div>
 
 </body>
 

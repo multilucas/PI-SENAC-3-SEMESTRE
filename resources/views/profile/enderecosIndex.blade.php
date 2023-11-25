@@ -21,29 +21,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2"></script>
 </head>
+
+
 <body class="bg-gray-900 text-white flex items-center justify-center h-screen dark:bg-gray-900 dark:text-gray-200">
 
     <!--Nav Bar-->
     <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 fixed top-0 w-full">
         <x-navbar :categorias='$categorias' />
     </nav>
-        <!--FIM Nav Bar-->
-
+    <!--FIM Nav Bar-->
 
     <!-- Menu Lateral -->
-    <div class="ml-4 w-1/4 bg-gray-800 p-4">
+    <div class="ml-10 w-1/4 bg-gray-800 p-4">
         <!-- Conteúdo do menu lateral -->
-        <h2 class="text-2xl font-semibold mb-4">Informações do Usuário</h2>
+        <h2 class="text-2xl font-semibold mb-4">Informações Usuário</h2>
         <ul>
-            <li><a href="{{ route('profile.edit') }}" class="text-blue-500">Perfil</a></li>
-            <li><a href="{{ route('endereco.index', Auth::id()) }}" class="text-blue-500">Endereços</a></li>
+            <li><a href="{{route('profile.edit')}}"class="text-blue-500">Perfil</a></li>
+            <li><a href="{{route( 'endereco.index', Auth::id())}}"class="text-blue-500">Endereços</a></li>
             <li><a href="{{route('carrinho.index')}}" class="text-blue-500">Carrinho</a></li>
+            <li><a href="{{route('pedidos.index')}}" class="text-blue-500">Pedidos</a></li>
         </ul>
     </div>
+    <!-- Fim Menu Lateral -->
 
     <div class="max-w-screen-md mx-auto p-4 mt-18">
         <div class="bg-gray-700 dark:bg-gray-800 shadow-md rounded p-8 mb-4">
-            <div class="mb-8 text-center">
+            <div class="text-center">
                 <h2 class="text-2xl font-semibold">Editar Perfil</h2>
             </div>
         </div>
@@ -53,7 +56,7 @@
                 <thead class="bg-gray-200 dark:bg-gray-700">
                     <tr>
                         <th class="py-3 px-6 text-left">Editar</th>
-                        <th class="py-3 px-6 text-left">Nome do Endereço</th>
+                        <th class="py-3  text-left">Nome do Endereço</th>
                         <th class="py-3 px-6 text-left">Logradouro</th>
                         <th class="py-3 px-6 text-left">Número</th>
                         <th class="py-3 px-6 text-left">Complemento</th>

@@ -26,7 +26,8 @@
     <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 fixed top-0 w-full">
         <x-navbar :categorias='$categorias' />
     </nav>
-        <!--FIM Nav Bar-->
+    <!--FIM Nav Bar-->
+
     <!-- Menu Lateral -->
     <div class="ml-10 w-1/4 bg-gray-800 p-4">
         <!-- Conteúdo do menu lateral -->
@@ -38,8 +39,9 @@
             <li><a href="{{route('pedidos.index')}}" class="text-blue-500">Pedidos</a></li>
         </ul>
     </div>
-<!-- Fim Menu Lateral -->
-    <div class=" max-w-md w-full mx-auto mt-18">
+    <!-- Fim Menu Lateral -->
+
+<div class=" max-w-md w-full mx-auto mt-18">
         <div class="bg-gray-700 dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <div class="mb-8 text-center ">
                 <h2 class="text-2xl font-semibold">Editar Perfil</h2>

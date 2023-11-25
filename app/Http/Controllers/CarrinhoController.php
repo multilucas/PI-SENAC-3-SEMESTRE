@@ -41,7 +41,7 @@ class CarrinhoController extends Controller
         $categorias = Categoria::all();
         $carrinhoItens = Carrinho::with('produto.imagens')->where('USUARIO_ID', auth()->user()->USUARIO_ID)->get();
         $enderecos = auth()->user()->endereco;
-        return view('carrinho.index', compact('carrinhoItens', 'categorias', 'enderecos'));
+        return view('carrinho.index',compact('carrinhoItens', 'categorias', 'enderecos'));
     }
 
     public function removerDoCarrinho($carrinhoItemId)

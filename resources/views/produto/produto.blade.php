@@ -28,7 +28,7 @@
     <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
         <x-navbar :categorias='$categorias' />
     </nav>
-        <!--Nav Bar-->
+    <!--Nav Bar-->
 
 
     <div class="bg-gray-900">
