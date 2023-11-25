@@ -18,28 +18,15 @@ class AuthenticatedSessionController extends Controller
         $categorias = Categoria::all();
         return view('auth.login', compact('categorias'));
     }
-    public function store(LoginRequest $request): RedirectResponse
-    {
+
+    public function store(LoginRequest $request): RedirectResponse{
         $usuario = User::where('USUARIO_EMAIL', $request->USUARIO_EMAIL)->first();
-        if(Hash::check($request->USUARIO_SENHA, $usuario->USUARIO_SENHA)){
+        if ($usuario && Hash::check($request->USUARIO_SENHA, $usuario->USUARIO_SENHA)) {
             Auth::login($usuario);
             return redirect("/");
-        }else{
-            return redirect("/login");
+        } else {
+            return redirect("/login")->with('error', 'Email ou senha estão errados');
         }
     }
-
-    /**
-     * Destroy an authenticated session.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/');
-    }
 }
+
