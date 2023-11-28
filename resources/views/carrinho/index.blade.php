@@ -29,18 +29,18 @@
         <!--Nav Bar-->
 
         <!-- Conteúdo do Carrinho -->
-        <div class="container mx-auto mt-8">
-            <h1 class="text-3xl font-semibold mb-4 text-white">Seu Carrinho</h1>
+        <div class=" container mx-auto mt-8">
+            <h1 class="text-3xl ml-10 font-semibold mb-4 text-white">Seu Carrinho</h1>
 
             <!-- Lista de Produtos no Carrinho -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="ml-10  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($carrinhoItens as $carrinhoItem)
                     @if ($carrinhoItem->ITEM_QTD > 0)
-                        <div class="bg-white p-6 rounded-lg shadow-md">
-
+                        <div class="bg-white  p-6 rounded-lg shadow-md">
+                            <a href="{{ route('produto.show', ['id' => $carrinhoItem->produto->PRODUTO_ID]) }} ">
                             <img class="rounded-t-lg w-full h-60 cursor-pointer"
                                 src="{{ $carrinhoItem->produto->imagens->first()->IMAGEM_URL }}" alt="product image" />
-
+                            </a>
                             <h2 class="text-xl font-semibold mb-2">{{ $carrinhoItem->produto->PRODUTO_NOME }}</h2>
 
                             <!--Formulario para atualizar-->
@@ -58,18 +58,29 @@
                                     Atualizar
                                 </button>
                             </form>
+                            <p class="w-full mb-5 text-xl font-semibold mb-2">Preço Invidual - R${{ $carrinhoItem->produto->PRODUTO_PRECO - $carrinhoItem->produto->PRODUTO_DESCONTO }}</p>
+                            <p class="w-full mb-5 text-xl font-semibold mb-2">Preço Total - R${{ $carrinhoItem->produto->PRODUTO_PRECO * $carrinhoItem->ITEM_QTD}}</p>
                             <a class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-700 text-sm" href="{{ route('delete.carrinho', $carrinhoItem->produto->PRODUTO_ID) }} ">Remover do carrinho</a>
                         </div>
                     @endif
                 @endforeach
             </div>
 
+            <!-- Total do Carrinho -->
+            <div class="ml-10 mt-8">
+                <h2 class="text-2xl font-semibold mb-4 text-white">Total do Carrinho</h2>
+                <div class="bg-white  p-6 rounded-lg shadow-md">
+                    <p class="w-full mb-5 text-xl font-semibold mb-2">Subtotal - R$ {{$total}}</p>
+                    <p class="w-full mb-5 text-xl font-semibold mb-2">Frete - R$0,00</p>
+                    <p class="w-full mb-5 text-xl font-semibold mb-2">Total - R$ </p>
+                </div>
+
             <!-- Button to submit the form and go to the order page -->
             <form method="post" action="{{ route('criar.pedido') }}">
                 @csrf
                 <!-- Escolha do Endereço -->
-                <div class="container mx-auto mt-8">
-                    <h2 class="text-2xl font-semibold mb-4 text-white">Escolha o endereço de entrega</h2>
+                <div class=" container mx-auto mt-8">
+                    <h2 class="ml-10 text-2xl font-semibold mb-4 text-white">Escolha o endereço de entrega</h2>
 
                 </div>
 
@@ -87,7 +98,7 @@
                         </option>
                     @endforeach
                 </select>
-                <button type="submit" class="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
+                <button type="submit" class="ml-10 mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
                     Finalizar Pedido
                 </button>
             </form>

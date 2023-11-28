@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carrinho;
 use App\Models\Categoria;
 use App\Models\Produto;
 use Illuminate\Http\Request;
@@ -10,6 +11,11 @@ class ProdutoController extends Controller
 {
     public function index(Request $request, $categoria = null)
     {
+        // Obtenha todos os itens do carrinho + total
+        $carrinhoItems = Carrinho::all();
+
+
+
         // Se a categoria estiver definida, filtre os produtos por ela
         if ($categoria) {
             $produtos = Categoria::where('CATEGORIA_NOME', $categoria)->firstOrFail()->produtos()->with('imagens')->paginate(8);

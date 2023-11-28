@@ -28,5 +28,15 @@ class AuthenticatedSessionController extends Controller
             return redirect("/login")->with('error', 'Email ou senha estão errados');
         }
     }
+    public function destroy(Request $request): RedirectResponse
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
 }
 
