@@ -30,37 +30,43 @@
     <!--Nav Bar-->
 
     <!-- Conteúdo do Carrinho -->
+    @if (session('success'))
+    <div class="mt-10 alert alert-successtext-3xl font-bold tracking-tight text-red-500 sm:text-4xl text-center">
+        {{ session('success') }}
 
-    <div class="bg-white ">
+    </div>
+@endif
+
+    <div class="bg-white text-center ">
         <div
-            class=" grid items-center gap-x-8 mt-10 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-1 lg:px-8">
+            class=" grid items-center gap-x-8  gap-y-16 px-4 py-5 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-1 lg:px-8 text-center">
             <div>
                 <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Seus Pedidos</h2>
                 <h1 class="mb-10    text-3xl font-semi-bold tracking-tight text-gray-900 sm:text-4xl">{{ $user->USUARIO_NOME }}
                 </h1>
 
                 <div
-                    class=" mb-10 mx-auto p-4  -mb-20 min-w-full dark:bg-gray-800 rounded shadow-md w-full">
-                    <div class="overflow-x-auto mt-5">
-                        <table class="min-w-full bg-white dark:bg-gray-800 rounded shadow-md">
-                            <thead class="text-gray-100 bg-gray-200 dark:bg-gray-700">
-                                <tr class="">
-                                    <th class="py-3 px-6 text-left ">Detalhes Pedido</th>
-                                    <th class="py-3 px-6 text-left ">Código do pedido</th>
-                                    <th class="py-3 px-6 text-left ">Data do Pedido</th>
-                                    <th class="py-3  text-left ">Status do Pedido</th>
-                                    <th class="py-3 px-6 text-left ">Endereço</th>
+                    class=" mb-10 mx-auto p-4  -mb-20 min-w-full dark:bg-gray-800 rounded shadow-md w-full text-center">
+                    <div class="overflow-x-auto mt-5 text-center">
+                        <table class="min-w-full bg-white dark:bg-gray-800 rounded shadow-md text-center">
+                            <thead class="text-gray-100 bg-gray-200 dark:bg-gray-700 text-center">
+                                <tr class="text-center">
+                                    <th class="py-3 px-6  ">Detalhes Pedido</th>
+                                    <th class="py-3 px-6  ">Código do pedido</th>
+                                    <th class="py-3 px-6  ">Data do Pedido</th>
+                                    <th class="py-3 ">Status do Pedido</th>
+                                    <th class="py-3 px-6 ">Endereço</th>
 
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-300 dark:divide-gray-600">
+                            <tbody class="text-center divide-y divide-gray-300 dark:divide-gray-600 ">
                                 @foreach ($pedidos as $pedido)
                                     @if ($pedido->STATUS_ID == 1)
-                                        <tr class="text-white">
+                                        <tr class="text-white ">
                                             <td class="py-4 px-6">
-                                                <a href="#"
-                                                    class="block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
-                                                    Detalhes
+                                                <a href="{{route('cancelar.pedido',['id' => $pedido->PEDIDO_ID])}}"
+                                                    class="block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 mx-auto">
+                                                    Cancelar Pedido
                                                 </a>
                                             </td>
                                             <td class="py-4 px-6 ">#{{ $pedido->PEDIDO_ID}}</td>

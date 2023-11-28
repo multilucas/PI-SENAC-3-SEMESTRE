@@ -53,7 +53,8 @@ class PedidoController extends Controller
               ]);
               $item->update(['ITEM_QTD' => 0]);
         }
-        return redirect(route('pedidos.index'));
+        
+        return redirect()->route('pedidos.index')->with('success', 'Pedido realizado com sucesso');
     }
 
     public function delete($id){
