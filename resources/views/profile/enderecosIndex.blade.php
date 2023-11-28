@@ -44,14 +44,8 @@
     </div>
     <!-- Fim Menu Lateral -->
 
-    <div class="max-w-screen-md mx-auto p-4 mt-18">
-        <div class="bg-gray-700 dark:bg-gray-800 shadow-md rounded p-8 mb-4">
-            <div class="text-center">
-                <h2 class="text-2xl font-semibold">Editar Perfil</h2>
-            </div>
-        </div>
-
-        <div class="overflow-x-auto mt-18">
+    <div class="max-w-screen-md mx-auto p-4 mt-18 -mb-20">
+        <div class="overflow-x-auto mt-20">
             <table class="min-w-full bg-white dark:bg-gray-800 rounded shadow-md">
                 <thead class="bg-gray-200 dark:bg-gray-700">
                     <tr>

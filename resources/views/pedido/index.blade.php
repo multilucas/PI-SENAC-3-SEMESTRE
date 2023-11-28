@@ -26,18 +26,59 @@
     <!--Nav Bar-->
     <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
         <x-navbar :categorias='$categorias' />
-        <!--Nav Bar-->
+    </nav>
+    <!--Nav Bar-->
 
-        <!-- Conteúdo do Carrinho -->
+    <!-- Conteúdo do Carrinho -->
 
-        <div class="bg-white">
-            <div
-                class="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
-                <div>
-                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Seus Pedidos</h2>
-                    <h1 class="text-3xl font-semi-bold tracking-tight text-gray-900 sm:text-4xl">{{$user->USUARIO_NOME}}</h1>
+    <div class="bg-white ">
+        <div
+            class=" grid items-center gap-x-8 mt-10 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-1 lg:px-8">
+            <div>
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Seus Pedidos</h2>
+                <h1 class="mb-10    text-3xl font-semi-bold tracking-tight text-gray-900 sm:text-4xl">{{ $user->USUARIO_NOME }}
+                </h1>
 
-                    @foreach ($pedidos as $pedido)
+                <div
+                    class=" mb-10 mx-auto p-4  -mb-20 min-w-full dark:bg-gray-800 rounded shadow-md w-full">
+                    <div class="overflow-x-auto mt-5">
+                        <table class="min-w-full bg-white dark:bg-gray-800 rounded shadow-md">
+                            <thead class="text-gray-100 bg-gray-200 dark:bg-gray-700">
+                                <tr class="">
+                                    <th class="py-3 px-6 text-left ">Detalhes Pedido</th>
+                                    <th class="py-3 px-6 text-left ">Código do pedido</th>
+                                    <th class="py-3 px-6 text-left ">Data do Pedido</th>
+                                    <th class="py-3  text-left ">Status do Pedido</th>
+                                    <th class="py-3 px-6 text-left ">Endereço</th>
+
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-300 dark:divide-gray-600">
+                                @foreach ($pedidos as $pedido)
+                                    @if ($pedido->STATUS_ID == 1)
+                                        <tr class="text-white">
+                                            <td class="py-4 px-6">
+                                                <a href="#"
+                                                    class="block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800">
+                                                    Detalhes
+                                                </a>
+                                            </td>
+                                            <td class="py-4 px-6 ">#{{ $pedido->PEDIDO_ID}}</td>
+                                            <td class="py-4 px-6">{{ $pedido->PEDIDO_DATA}}</td>
+                                            <td class="py-4 px-6">{{ $pedido->pedidoStatus->STATUS_DESC }}</td>
+                                            <td class="py-4 px-6">{{ $pedido->endereco->ENDERECO_LOGRADOURO }}- {{ $pedido->endereco->ENDERECO_NUMERO }} - {{ $pedido->endereco->ENDERECO_CIDADE }} - {{ $pedido->endereco->ENDERECO_ESTADO }}</td>
+
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- @foreach ($pedidos as $pedido)
                     @if ($pedido->STATUS_ID == 1)
                         <dl class="mt-16 grid grid-cols-1 gap-x- gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
                             <div class="border-t border-gray-200 pt-4">
@@ -60,13 +101,13 @@
                 <div class="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
                 </div>
             </div>
-        </div>
+        </div> --}}
 
 
 
-        <!-- FIM Conteúdo do Carrinho -->
+    <!-- FIM Conteúdo do Carrinho -->
 
-        {{-- <div class="container mx-auto mt-8">
+    {{-- <div class="container mx-auto mt-8">
             <h1 class="text-3xl font-semibold mb-4 text-white">Seu Carrinho</h1>
 
             <!-- Lista de Produtos no Carrinho -->
@@ -82,9 +123,11 @@
             </div> --}}
 
 
-        <!-- INICIO FOOTER -->
-        <footer class="bg-gray-800 text-white">
-            <div class="container mx-auto py-8 mt-10 flex flex-wrap justify-center">
+
+    <!-- INICIO FOOTER -->
+    <div class="mt-20 mt-18 -mb-20 w-full">
+        <footer class="bg-gray-800 text-white mt-10 ">
+            <div class="container  py-8 mt-10 flex flex-wrap justify-center">
                 <!-- Seção de Links Rápidos -->
                 <div class="w-full sm:w-1/2 md:w-1/4 lg:w-1/5 mb-6">
                     <h2 class="text-xl font-semibold mb-4">Links Rápidos</h2>
@@ -136,6 +179,7 @@
                 </div>
             </div>
         </footer>
+    </div>
 </body>
 
 </html>
