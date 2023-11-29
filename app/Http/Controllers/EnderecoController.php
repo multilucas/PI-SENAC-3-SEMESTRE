@@ -10,9 +10,23 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Http;
 
 class EnderecoController extends Controller
 {
+    /*
+    Criando o teste de consulta de CEP
+    */
+
+    public function consultarCep($cep)
+    {
+        $response = Http::get("https://api.postmon.com.br/v1/cep/{$cep}");
+        $endereco = $response->json();
+
+        return response()->json($endereco);
+    }
+
+
     public function create(User $id)
     {
         return view('profile.enderecos', [
@@ -75,6 +89,6 @@ class EnderecoController extends Controller
         return redirect(route('endereco.index', $id->USUARIO_ID));
     }
 
-    
+
 
 }

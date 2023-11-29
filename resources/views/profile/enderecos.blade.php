@@ -61,10 +61,20 @@
                             type="text" name="ENDERECO_NOME">
                     </div>
                     <div class="mb-4">
+                        <label class="block text-sm font-bold mb-2" for="ENDERECO_CEP">
+                            CEP
+                        </label>
+                        <input
+                            id="ENDERECO_CEP"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            type="text" name="ENDERECO_CEP" oninput="consultarCep(this.value)">
+                    </div>
+                    <div class="mb-4">
                         <label class="block text-sm font-bold mb-2" for="ENDERECO_LOGRADOURO">
                             Logradouro
                         </label>
                         <input
+                            id="ENDERECO_LOGRADOURO"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             type="text" name="ENDERECO_LOGRADOURO">
                     </div>
@@ -85,18 +95,11 @@
                             type="text" name="ENDERECO_COMPLEMENTO">
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-bold mb-2" for="ENDERECO_CEP">
-                            CEP
-                        </label>
-                        <input
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            type="text" name="ENDERECO_CEP">
-                    </div>
-                    <div class="mb-4">
                         <label class="block text-sm font-bold mb-2" for="ENDERECO_CIDADE">
                             Cidade
                         </label>
                         <input
+                            id="ENDERECO_CIDADE"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             type="text" name="ENDERECO_CIDADE">
                     </div>
@@ -105,6 +108,7 @@
                             Estado
                         </label>
                         <input
+                            id="ENDERECO_ESTADO"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             type="text" name="ENDERECO_ESTADO">
                     </div>
@@ -121,6 +125,25 @@
             </form>
         </div>
     </div>
+
+
+
+<script>async function consultarCep(cep) {
+    const cepFormatado = cep.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+    if (cepFormatado.length === 8) {
+        const response = await fetch(`/consultar-cep/${cepFormatado}`);
+        const data = await response.json();
+
+        // Preenche os campos do formulário
+        document.getElementById('ENDERECO_LOGRADOURO').value = data.logradouro || '';
+        document.getElementById('ENDERECO_CIDADE').value = data.cidade || '';
+        document.getElementById('ENDERECO_ESTADO').value = data.estado || '';
+    }
+}
+</script>
+
+
 
 </body>
 

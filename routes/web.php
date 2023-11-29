@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/enderecos/{id}', [EnderecoController::class, 'store'])->name('endereco.store');
     Route::get('/profile/enderecos/edit/{id}', [EnderecoController::class, 'edit'])->name('endereco.editar');
     Route::put('/profile/enderecos/update/{id}', [EnderecoController::class, 'update'])->name('endereco.atualizar');
+    Route::get('/consultar-cep/{cep}', [EnderecoController::class, 'consultarCep'])->name('endereco.cep');
+
 
 
     Route::get('/adicionar-ao-carrinho/{produtoId}', [CarrinhoController::class, 'adicionarAoCarrinho'])->name('adicionar-ao-carrinho');
