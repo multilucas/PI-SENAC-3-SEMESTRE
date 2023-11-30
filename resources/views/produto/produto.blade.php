@@ -98,7 +98,7 @@
             <!-- Options -->
             <div class="mt-4 lg:row-span-3 lg:mt-0">
                 <h2 class="sr-only">Product information</h2>
-                @if ($produto->PRODUTO_DESCONTO > 0)
+                @if ($produto->PRODUTO_PRECO > 0)
                     <p class="text-3xl tracking-tight text-gray-400">R$ <s>{{ $produto->PRODUTO_PRECO }}</s></p>
                     <p class="text-3xl tracking-tight text-white">DESCONTO: R${{ $produto->PRODUTO_DESCONTO }}</p>
                     <p class="text-3xl tracking-tight text-white">R$
@@ -190,17 +190,15 @@
                 </div>
 
                 <div class="mt-10">
-                    <h3 class="text-sm font-medium text-white">Highlights</h3>
+                    <h3 class="text-sm font-medium text-white">Principais Características</h3>
 
                     <div class="mt-4">
                         <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
-                            <li class="text-gray-400"><span class="text-gray-100">Hand cut and sewn locally</span>
+                            <li class="text-gray-400"><span class="text-gray-100">Diversão garantida!</span>
                             </li>
-                            <li class="text-gray-400"><span class="text-gray-100">Dyed with our proprietary
-                                    colors</span></li>
-                            <li class="text-gray-400"><span class="text-gray-100">Pre-washed &amp;
-                                    pre-shrunk</span></li>
-                            <li class="text-gray-400"><span class="text-gray-100">Ultra-soft 100% cotton</span>
+                            <li class="text-gray-400"><span class="text-gray-100">Compre uma vez só</span></li>
+                            <li class="text-gray-400"><span class="text-gray-100">Milhões de possibilidades</span></li>
+                            <li class="text-gray-400"><span class="text-gray-100">Devolução grátis em até 30 dias</span>
                             </li>
                         </ul>
                     </div>

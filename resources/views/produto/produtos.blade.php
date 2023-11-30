@@ -36,8 +36,7 @@
                     Lançamentos</h2>
                 <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
 
-                    @foreach ($produtos as $produto)
-                        @if ($produto->PRODUTO_ATIVO == 1)
+                        @foreach ($produtos as $produto)
                             <a href="{{ route('produto.show', ['id' => $produto->PRODUTO_ID]) }}" class="group">
                                 <div
                                     class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
@@ -48,8 +47,8 @@
                                 <h3 class="mt-4 text-sm text-white">{{ $produto->PRODUTO_NOME }}</h3>
                                 <p class="mt-1 text-lg font-medium text-white">{{ $produto->PRODUTO_PRECO }}</p>
                             </a>
-                        @endif
-                    @endforeach
+                        @endforeach
+                    
                 </div>
                 {{ $produtos->links() }}
             </div>

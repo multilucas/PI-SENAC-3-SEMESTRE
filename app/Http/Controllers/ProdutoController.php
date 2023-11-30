@@ -32,17 +32,20 @@ class ProdutoController extends Controller
 
     public function indexNaProdutos(Request $request, $categoria = null)
     {
-        // Se a categoria estiver definida, filtre os produtos por ela
-        if ($categoria) {
-            $produtos = Categoria::where('CATEGORIA_NOME', $categoria)->firstOrFail()->produtos()->with('imagens')->paginate(16);
-        } else {
-            // Se não, obtenha todos os produtos paginados com imagens
-            $produtos = Produto::with('imagens')->paginate(16);
-        }
+        // Obtenha todos os itens do carrinho + total
+    $carrinhoItems = Carrinho::all();
 
-        $categorias = Categoria::all();
+    // Se a categoria estiver definida, filtre os produtos por ela
+    if ($categoria) {
+        $produtos = Categoria::where('CATEGORIA_NOME', $categoria)->firstOrFail()->produtos()->where('PRODUTO_ATIVO', 1)->with('imagens')->paginate(16);
+    } else {
+        // Se não, obtenha todos os produtos paginados com imagens
+        $produtos = Produto::where('PRODUTO_ATIVO', 1)->with('imagens')->paginate(16);
+    }
 
-        return view('produto.produtos', compact('produtos', 'categorias'));
+    $categorias = Categoria::all();
+
+    return view('produto.produtos', compact('produtos', 'categorias'));
     }
 
 
