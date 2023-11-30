@@ -128,7 +128,8 @@
 
 
 
-<script>async function consultarCep(cep) {
+<script>
+async function consultarCep(cep) {
     const cepFormatado = cep.replace(/\D/g, ''); // Remove caracteres não numéricos
 
     if (cepFormatado.length === 8) {
