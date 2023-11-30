@@ -48,7 +48,7 @@ class CarrinhoController extends Controller
 
         // Calcule o subtotal
         $total = $carrinhoItens->reduce(function ($carry, $item) {
-            return $carry + $item->produto->PRODUTO_PRECO * $item->ITEM_QTD;
+            return $carry + ($item->produto->PRODUTO_PRECO - $item->produto->PRODUTO_DESCONTO) * $item->ITEM_QTD;
         }, 0);
 
         return view('carrinho.index', ['carrinhoItens' => $carrinhoItens, 'total' => $total], compact('carrinhoItens', 'categorias', 'enderecos', 'total'));
@@ -111,7 +111,7 @@ class CarrinhoController extends Controller
     public function calculateSubtotal($carrinhoItens)
 {
     $total = $carrinhoItens->reduce(function ($carry, $item) {
-        return $carry + $item->produto->PRODUTO_PRECO * $item->ITEM_QTD;
+        return $carry + ($item->produto->PRODUTO_PRECO - $item->produto->PRODUTO_DESCONTO) * $item->ITEM_QTD;
     }, 0);
 
     return $total;

@@ -59,7 +59,7 @@
                                 </button>
                             </form>
                             <p class="w-full mb-5 text-xl font-semibold mb-2">Preço Invidual - R${{ $carrinhoItem->produto->PRODUTO_PRECO - $carrinhoItem->produto->PRODUTO_DESCONTO }}</p>
-                            <p class="w-full mb-5 text-xl font-semibold mb-2">Preço Total - R${{ $carrinhoItem->produto->PRODUTO_PRECO * $carrinhoItem->ITEM_QTD}}</p>
+                            <p class="w-full mb-5 text-xl font-semibold mb-2">Preço Total - R${{ ($carrinhoItem->produto->PRODUTO_PRECO - $carrinhoItem->produto->PRODUTO_DESCONTO) * $carrinhoItem->ITEM_QTD}}</p>
                             <a class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-700 text-sm" href="{{ route('delete.carrinho', $carrinhoItem->produto->PRODUTO_ID) }} ">Remover do carrinho</a>
                         </div>
                     @endif
