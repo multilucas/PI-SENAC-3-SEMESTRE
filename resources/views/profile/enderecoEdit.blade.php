@@ -23,16 +23,24 @@
 </head>
 
 <body class="bg-gray-900 text-white flex items-center justify-center h-screen dark:bg-gray-900 dark:text-gray-200">
+    <nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 fixed top-0 w-full">
+        <x-navbar :categorias='$categorias' />
+    </nav>
+    <!--FIM Nav Bar-->
+
     <!-- Menu Lateral -->
     <div class="ml-10 w-1/4 bg-gray-800 p-4">
         <!-- Conteúdo do menu lateral -->
         <h2 class="text-2xl font-semibold mb-4">Informações Usuário</h2>
         <ul>
-            <li><a href="{{route('profile.edit')}}"class="text-blue-500">Perfil</a></li>
-            <li><a href="{{route( 'endereco.index', Auth::id() )}}"class="text-blue-500">Endereços</a></li>
-            <li><a href="{{route('carrinho.index')}}"class="text-blue-500">Carrinho</a></li>
+            <li><a href="{{ route('profile.edit') }}"class="text-blue-500">Perfil</a></li>
+            <li><a href="{{ route('endereco.index', Auth::id()) }}"class="text-blue-500">Endereços</a></li>
+            <li><a href="{{ route('carrinho.index') }}" class="text-blue-500">Carrinho</a></li>
+            <li><a href="{{ route('pedidos.index') }}" class="text-blue-500">Pedidos</a></li>
         </ul>
     </div>
+
+
 
 <div class="max-w-md w-full mx-auto">
     <div class="bg-gray-700 dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
