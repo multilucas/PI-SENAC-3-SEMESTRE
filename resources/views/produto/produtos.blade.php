@@ -28,6 +28,26 @@
         <x-navbar :categorias='$categorias' />
         <!--Nav Bar-->
 
+        <!--Barra-->
+
+        <div class="flex justify-center py-4 bg-gray-900">
+            <form action="{{ route('produtos') }}" method="GET" class="flex items-center max-w-2xl w-full">
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Pesquisar produtos"
+                    class="border border-gray-300 px-4 py-2 rounded-l focus:outline-none focus:border-blue-500 w-full"
+                >
+                <button
+                    type="submit"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600 focus:outline-none"
+                >
+                    Pesquisar
+                </button>
+            </form>
+        </div>
+
+
         <!--PRODUTOS-->
         <div class="bg-gray-900">
             <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -48,7 +68,7 @@
                                 <p class="mt-1 text-lg font-medium text-white">{{ $produto->PRODUTO_PRECO }}</p>
                             </a>
                         @endforeach
-                    
+
                 </div>
                 {{ $produtos->links() }}
             </div>

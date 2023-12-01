@@ -129,6 +129,8 @@
     </div>
 </div>
 
+
+
 <script>
 async function consultarCep(cep) {
     const cepFormatado = cep.replace(/\D/g, ''); // Remove caracteres não numéricos

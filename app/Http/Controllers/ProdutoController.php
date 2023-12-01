@@ -23,7 +23,7 @@ class ProdutoController extends Controller
             // Se não, obtenha todos os produtos paginados com imagens
             $produtos = Produto::with('imagens')->paginate(8);
         }
-
+        $search = $request->input('search');
         $categorias = Categoria::all();
 
         return view('produto.main', compact('produtos', 'categorias'));
@@ -31,22 +31,33 @@ class ProdutoController extends Controller
 
 
     public function indexNaProdutos(Request $request, $categoria = null)
-    {
-        // Obtenha todos os itens do carrinho + total
+{
+    // Obtenha todos os itens do carrinho + total
     $carrinhoItems = Carrinho::all();
+
+    // Obtenha o termo de pesquisa do request
+    $search = $request->get('search');
 
     // Se a categoria estiver definida, filtre os produtos por ela
     if ($categoria) {
-        $produtos = Categoria::where('CATEGORIA_NOME', $categoria)->firstOrFail()->produtos()->where('PRODUTO_ATIVO', 1)->with('imagens')->paginate(16);
+        $query = Categoria::where('CATEGORIA_NOME', $categoria)->firstOrFail()->produtos()->where('PRODUTO_ATIVO', 1)->with('imagens');
     } else {
-        // Se não, obtenha todos os produtos paginados com imagens
-        $produtos = Produto::where('PRODUTO_ATIVO', 1)->with('imagens')->paginate(16);
+        // Se não, obtenha todos os produtos com imagens
+        $query = Produto::where('PRODUTO_ATIVO', 1)->with('imagens');
     }
+
+    // Adicione a condição de pesquisa, se houver um termo de pesquisa
+    if ($search) {
+        $query->where('PRODUTO_NOME', 'like', $search . '%');
+    }
+
+    // Pagine os resultados
+    $produtos = $query->paginate(16);
 
     $categorias = Categoria::all();
 
     return view('produto.produtos', compact('produtos', 'categorias'));
-    }
+}
 
 
 

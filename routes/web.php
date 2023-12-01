@@ -45,7 +45,6 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
-
     Route::post('/pedidos', [PedidoController::class, 'store'])->name('criar.pedido');
     Route::get('/pedidos/{id}', [PedidoController::class, 'delete'])->name('cancelar.pedido');
 });
